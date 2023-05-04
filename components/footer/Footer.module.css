@@ -1,0 +1,78 @@
+.Footer_mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 376px;
+  width: 100%;
+  color: white;
+}
+.Footer_content {
+  display: flex;
+  justify-content: space-between;
+}
+.Footer_frame1,
+.Footer_frame2,
+.Footer_frame3,
+.Footer_frame4,
+.Footer_frame5 {
+  width: 200px;
+}
+.menuItem1 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.menuItem2,
+.menuItem3,
+.menuItem4,
+.menuItem5,
+.menuItem6 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.menuEmail{
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.Footer_frame1 .menuEmail input[type="email"] {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  padding: 5px;
+  padding-right: 10px;
+}
+.iconWrapper {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.qrcode {
+  font-size: 10px;
+  color: grey;
+  margin-right: 10px;
+}
+.store img:last-child  {
+    margin-left: 10px;
+  }
+  .store img:first-child {
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+.scanLinks{
+    display: flex;
+}
+.Footer_copyRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 64px;
+  width: 100%;
+}

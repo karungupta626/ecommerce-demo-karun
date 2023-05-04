@@ -1,0 +1,31 @@
+.topHeader_mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 48px;
+  width: 100%;
+  color: white;
+}
+.topHeader_frame {
+  display: flex;
+  max-width: 1030px;
+  justify-content: space-between;
+}
+.topHeader_frame1 {
+  display: flex;
+  align-items: center;
+}
+.topHeader_frame1 p {
+  margin: 0;
+  font-size: 16px;
+}
+.topHeader_frame2 {
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.topHeader_language {
+  margin-left: 200px;
+}
