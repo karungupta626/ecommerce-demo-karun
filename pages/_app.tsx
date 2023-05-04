@@ -1,4 +1,4 @@
-// import "../styles/globals.css"
+import styles from "../styles/globals.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import type { AppProps } from 'next/app'
 import Header from '@/components/header/Header'
@@ -9,7 +9,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return <>
   <TopHeader/>
   <Header/>
+  <div className={styles.component}>
   <Component {...pageProps} />
+  </div>
   <Footer/>
   </>
 }
