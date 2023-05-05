@@ -1,0 +1,11 @@
+.index_fullServicesDiv{
+    margin-bottom: 140px;
+    display: flex;
+    justify-content: center;
+}
+.index_speakerDiv{
+    justify-content: center;
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 71px;
+}

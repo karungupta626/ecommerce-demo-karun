@@ -1,9 +1,7 @@
 import { Button } from "@mui/material";
 import styles from "./ErrorPage.module.css";
-import { useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
-    // const navigate = useNavigate();
   return (
     <div className={styles.ErrorPage_mainDiv}>
       <h1 className={styles.ErrorPage_heading}>404 Not Found</h1>
@@ -15,5 +13,4 @@ const ErrorPage = () => {
     </div>
   );
 };
-
 export default ErrorPage;

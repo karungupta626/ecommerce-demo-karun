@@ -1,0 +1,29 @@
+.newArrival_mainDiv{
+    margin-bottom: 140px;
+    margin-left: 50px;
+}
+.newArrival_featuredDiv {
+  font-size: 16px;
+  font-weight: bold;
+  color: #db4444;
+}
+.newArrival_newArrivalDiv {
+  font-size: 33px;
+  font-weight: bold;
+}
+.newArrival_imageDiv {
+  margin-top: 60px;
+  display: flex;
+}
+.newArrival_imageDiv1 {
+  margin-right: 30px;
+}
+.newArrival_imageDiv5 {
+  margin-right: 30px;
+}
+.newArrival_imageDiv3 {
+  margin-bottom: 32px;
+}
+.newArrival_imageDiv4 {
+  display: flex;
+}
