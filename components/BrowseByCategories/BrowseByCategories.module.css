@@ -1,14 +1,17 @@
-.explore_mainDiv {
+.browseByCategories_mainDiv {
   margin-bottom: 140px;
   margin-left: 50px;
 }
-.explore_featuredDiv {
+.browseByCategories_featuredDiv {
   margin-top: 24px;
   font-size: 16px;
   font-weight: bold;
   color: #db4444;
 }
-.explore_newArrivalDiv {
+.browseByCategories_browseDiv {
   font-size: 33px;
   font-weight: bold;
+}
+.category_Div{
+    margin-top: 60px;
 }

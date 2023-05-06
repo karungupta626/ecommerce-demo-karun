@@ -17,3 +17,8 @@
     margin-top: 15px;
     margin-bottom: 40px;
 }
+.inputDivError{
+    color: red;
+    font-size: medium;
+    font-weight:bold;
+}

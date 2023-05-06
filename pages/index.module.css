@@ -1,11 +1,40 @@
-.index_fullServicesDiv{
-    margin-bottom: 140px;
-    display: flex;
-    justify-content: center;
+.index_fullServicesDiv {
+  margin-bottom: 140px;
+  display: flex;
+  justify-content: center;
 }
-.index_speakerDiv{
-    justify-content: center;
-    display: flex;
-    margin-right: 20px;
-    margin-bottom: 71px;
+.index_speakerDiv {
+  justify-content: center;
+  display: flex;
+  margin-right: 20px;
+  margin-bottom: 71px;
+}
+.index_exploreDiv {
+  margin-bottom: 140px;
+  margin-top: 71px;
+}
+.index_bestSellingProductDiv {
+  margin-top: 45px;
+  margin-bottom: 140px;
+}
+.index_categoriesDiv {
+  margin-top: 45px;
+  margin-bottom: 115px;
+}
+.index_flashSalesDiv{
+    margin-top: 140px;
+    margin-bottom: 150px;
+}
+.scrollButton {
+  background-color: #f5f5f5;
+  margin-left: 95%;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

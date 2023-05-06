@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./LoginPage.module.css";
 import TextField from "@mui/material/TextField";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "@/store";
 import { loginUserAsync } from "@/reducers/AuthSlice";
-import { User } from "@/types/UserDetails";
 
 interface LoginForm {
   username: string;
@@ -20,19 +19,25 @@ export default function LoginPage() {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
   const authStatus = useSelector((state: RootState) => state.auth.status);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const onSubmit: SubmitHandler<LoginForm> = (data) => {
+  useEffect(() => {
+    if (isAuthenticated) {
+    router.push("/");
+    }
+    }, [isAuthenticated]);
+    
+    const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const { username, password } = data;
-  const user: User = { id: 0, username, password };
-    dispatch(loginUserAsync(user)).then((resultAction) => {
-      if (loginUserAsync.fulfilled.match(resultAction)) {
-        router.push("/");
-      } else {
-        setErrorMessage("Error logging in");
-      }
-    });
-  };
+    try {
+    await dispatch(loginUserAsync({ username, password }));
+    } catch (error) {
+    setErrorMessage((error as Error).message || "Check Your Credentials");
+    }
+    };
   return (
     <>
       <div className={styles.LoginPage_container}>
@@ -54,7 +59,7 @@ export default function LoginPage() {
               label="Username"
               variant="standard"
             />
-            <br />
+            <br/>
             <TextField
               {...register("password", { required: true })}
               className={styles.LoginPage_inputDivPassword}
@@ -62,7 +67,7 @@ export default function LoginPage() {
               variant="standard"
               type="password"
             />
-            <br />
+            <br/>
             <Button
               variant="contained"
               type="submit"

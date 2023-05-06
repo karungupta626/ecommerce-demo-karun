@@ -1,4 +1,7 @@
-import styles from "./Explore.module.css";
+import React from 'react';
+import styles from './Explore.module.css';
+import Card from '../Cards/Card';
+
 
 export default function Explore() {
   return (
@@ -14,7 +17,9 @@ export default function Explore() {
           &nbsp;&nbsp; Our Products
         </div>
         <div className={styles.explore_newArrivalDiv}>Explore Our Products</div>
-        <div className={styles.explore_Div}>Explore Our Products</div>
+        <div className={styles.card_Div}>
+         
+        </div>
       </div>
     </>
   );

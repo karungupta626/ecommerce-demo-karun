@@ -1,14 +1,17 @@
-.explore_mainDiv {
+.flashSales_mainDiv {
   margin-bottom: 140px;
   margin-left: 50px;
 }
-.explore_featuredDiv {
+.flashSales_featuredDiv {
   margin-top: 24px;
   font-size: 16px;
   font-weight: bold;
   color: #db4444;
 }
-.explore_newArrivalDiv {
+.flashSales_flashSalesDiv {
   font-size: 33px;
   font-weight: bold;
+}
+.flashSales_timerDiv {
+  margin-left: 190px;
 }
