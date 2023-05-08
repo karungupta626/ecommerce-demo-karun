@@ -1,6 +1,5 @@
 .explore_mainDiv {
   margin-bottom: 140px;
-  margin-left: 50px;
 }
 .explore_featuredDiv {
   margin-top: 24px;
@@ -11,4 +10,10 @@
 .explore_newArrivalDiv {
   font-size: 33px;
   font-weight: bold;
+}
+.card_Div{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+  grid-auto-rows: 200px;
 }

@@ -14,7 +14,7 @@ export default function FlashSales() {
           &nbsp;&nbsp; Today's
         </div>
         <div className={styles.flashSales_flashSalesDiv}>
-            <span>Flash Sales</span>
+          <span>Flash Sales</span>
           <span className={styles.flashSales_timerDiv}>
             <img
               src="/flashsaletimer.png"

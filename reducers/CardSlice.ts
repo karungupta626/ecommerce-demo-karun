@@ -1,17 +1,11 @@
+import { ITypes } from '@/types/UserDetails';
+import { UserService } from '@/types/UserService';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-  discount: number;
-  rating: number;
-}
 
-interface CardState {
-  products: Product[];
-  status: 'idle' | 'loading' | 'failed';
+export interface CardState {
+  products: ITypes[];
+  status: 'idle' | 'succeeded' | 'loading' | 'failed';
   error: string | null;
 }
 
@@ -22,9 +16,8 @@ const initialState: CardState = {
 };
 
 export const fetchProducts = createAsyncThunk('card/fetchProducts', async () => {
-  const response = await fetch('https://dummyjson.com/products');
-  const data = await response.json();
-  return data;
+  const products = await UserService.getAllProducts();
+  return products;
 });
 
 export const cardSlice = createSlice({
@@ -37,7 +30,7 @@ export const cardSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'idle';
+        state.status = 'succeeded'; 
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {

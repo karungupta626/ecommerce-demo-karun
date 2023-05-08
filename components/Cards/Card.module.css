@@ -1,14 +1,9 @@
 .card {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
-  overflow: auto;
   height: 322px;
   width: 270px;
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-  
 }
 
 .image {
@@ -17,13 +12,12 @@
 }
 
 .name {
-    font-size: 20px;
-    font-weight: bold;
-    
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .price {
-    color: #DB4444;
+  color: #db4444;
 }
 
 .button {
