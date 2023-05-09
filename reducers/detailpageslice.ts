@@ -1,9 +1,5 @@
-import { AppThunk } from '@/store';
 import { ITypes } from '@/types/UserDetails';
-import { UserService } from '@/types/UserService';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DetailPageState {
   product: ITypes | null;
@@ -20,31 +16,28 @@ const initialState: DetailPageState = {
 export const detailPageSlice = createSlice({
   name: 'detailPage',
   initialState,
-  reducers: {
-    getProductStart: (state) => {
-      state.status = 'loading';
-    },
-    getProductSuccess: (state, action: PayloadAction<ITypes>) => {
-      state.status = 'succeeded';
-      state.product = action.payload;
-      state.error = null;
-    },
-    getProductFailure: (state, action: PayloadAction<string>) => {
-      state.status = 'failed';
-      state.error = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProductById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProductById.fulfilled, (state, action) => {
+        state.status = 'succeeded'; 
+        state.product = action.payload;
+      })
+      .addCase(fetchProductById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? 'Failed to fetch products';
+      })
+  
   },
 });
+export const fetchProductById = createAsyncThunk('detailPage/fetchProductById', async(id) => {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  const data = await response.json();
+  return data;
+});
 
-export const { getProductStart, getProductSuccess, getProductFailure } = detailPageSlice.actions;
 
-export const fetchProductById = (id: number): AppThunk => async (dispatch) => {
-  try {
-  dispatch(getProductStart());
-  const product = await UserService.getProductById(id);
-  // dispatch(getProductSuccess(product));
-  } catch (error) {
-  dispatch(getProductFailure('Failed to fetch product'));
-  }
-  };
-export default detailPageSlice.reducer;
+export default detailPageSlice.reducer

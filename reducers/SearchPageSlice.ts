@@ -19,7 +19,7 @@ const initialState: SearchState = {
 export const searchProductsAsync = createAsyncThunk(
   "search/searchProductsAsync",
   async (query: string) => {
-    const res = await UserService.getAllProducts();
+    const res = await UserService.getAllProducts(100);
     const filteredProducts = res.filter((product: { title: string; }) => {
         const title = product.title.toLowerCase();
         const keywordLower = typeof query === "string" ? query.toLowerCase() : "";

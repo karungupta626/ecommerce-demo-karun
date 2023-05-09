@@ -17,7 +17,7 @@ interface LoginForm {
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginForm>();
   const dispatch: AppDispatch = useDispatch();
-  const router = useRouter();
+  // const router = useRouter();
   const authStatus = useSelector((state: RootState) => state.auth.status);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
@@ -26,7 +26,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-    router.push("/");
+    // router.push("/");
     }
     }, [isAuthenticated]);
     

@@ -5,6 +5,7 @@
   height: 80px;
   width: 100%;
   justify-content: space-between;
+  cursor: pointer;
 }
 .Header_frame1 {
   font-weight: bold;
@@ -15,6 +16,9 @@
 }
 .menuItem{
   margin-right: 35px;
+}
+.menuItem2{
+  margin-left: 35px;
 }
 .Header_frame3 {
   display: flex;

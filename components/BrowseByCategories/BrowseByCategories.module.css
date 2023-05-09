@@ -11,6 +11,14 @@
   font-size: 33px;
   font-weight: bold;
 }
-.category_Div{
+.category_DivMain{
     margin-top: 60px;
+    display: flex;
+}
+.category_Div{
+    border: 1px solid black;
+    height: 145px;
+    width: 170px;
+    margin-right: 30px;
+
 }

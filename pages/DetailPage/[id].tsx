@@ -1,36 +1,51 @@
-import Card from '@/components/Cards/Card';
-import { fetchProductById } from '@/reducers/detailpageslice';
-import { AppDispatch, RootState } from '@/store';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
+import { fetchProductById } from '@/reducers/detailpageslice';
 
-const ProductDetail = () => {
-  const router = useRouter();
-  const { id } = router.query;
+interface Product {
+  title: string;
+  description: string;
+  price: number;
+  rating: number;
+  category: string;
+}
+
+interface DetailPageProps {
+  id: number;
+}
+
+const DetailPage = ({ id }: DetailPageProps) => {
+  
   const dispatch: AppDispatch = useDispatch();
-  const { product, status, error } = useSelector((state: RootState) => state.detailPage);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProductById(Number(id)));
-    }
-  }, [id, dispatch]);
+    dispatch(fetchProductById());
+  }, [dispatch, id]);
+
+  const { product, status, error } = useSelector((state: RootState) => state.detailPage);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'failed' && <p>{error}</p>}
-      {status === 'succeeded' && product && (
+      {product && (
         <div>
           <h1>{product.title}</h1>
           <p>{product.description}</p>
-          <p>{product.price}</p>
-          <Card product={product} key={product.id} /> 
+          <p>Price: ${product.price}</p>
+          <p>Rating: {product.rating}</p>
+          <p>Category: {product.category}</p>
         </div>
       )}
     </div>
   );
 };
 
-export default ProductDetail;
+export default DetailPage;

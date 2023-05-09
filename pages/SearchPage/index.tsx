@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { ITypes } from "@/types/UserDetails";
 import { RootState } from "@/store/rootReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   selectProducts,
   selectStatus,
@@ -12,6 +12,8 @@ import {
   searchProductsAsync,
 } from "@/reducers/SearchPageSlice";
 import { AppDispatch } from "@/store";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SearchPage() {
   const router = useRouter();
@@ -20,11 +22,13 @@ export default function SearchPage() {
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector(selectProducts);
   const status = useSelector(selectStatus);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(8);
 
   useEffect(() => {
-    if (keyword) {
-      dispatch(setQuery(keyword as string));
-      dispatch(searchProductsAsync(keyword as string));
+    if (typeof keyword === "string" && keyword.trim().length > 0) {
+      dispatch(setQuery(keyword));
+      dispatch(searchProductsAsync(keyword));
     }
   }, [dispatch, keyword]);
 
@@ -35,21 +39,50 @@ export default function SearchPage() {
     return title.includes(keywordLower);
   });
 
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = filteredProducts?.slice(indexOfFirstCard, indexOfLastCard);
+
+  const totalPages = Math.ceil(filteredProducts?.length / cardsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <>
-      <div className={styles.searchResult}>
-        <h1>Search Results for "{keyword}"</h1>
-        <>
+      <div className={`container-fluid ${styles.searchResult}`}>
+        <div className={styles.searchResultMainDiv}>
+          <h2 className={styles.searchResultHeadDiv}>
+            Search Results for "{keyword}"
+          </h2>
+          <div className={styles.pagination}>
+            <button onClick={prevPage} disabled={currentPage === 1}>
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            &nbsp;&nbsp;
+            <button onClick={nextPage} disabled={currentPage === totalPages}>
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        </div>
           {filteredProducts.length > 0 ? (
-            <div className={styles.productGrid}>
-              {filteredProducts.map((product: ITypes) => (
+            <div className={`container ${styles.productGrid}`}>
+              {currentCards.map((product: ITypes) => (
                 <Card key={product.id} product={product} />
               ))}
             </div>
           ) : (
-            <p>No products found.</p>
+            <h3>No products found.</h3>
           )}
-        </>
       </div>
     </>
   );
