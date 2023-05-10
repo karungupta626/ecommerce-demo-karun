@@ -62,7 +62,7 @@ export default function SearchPage() {
       <div className={`container-fluid ${styles.searchResult}`}>
         <div className={styles.searchResultMainDiv}>
           <h2 className={styles.searchResultHeadDiv}>
-            Search Results for "{keyword}"
+            {`Search Results for "${keyword}"`}
           </h2>
           <div className={styles.pagination}>
             <button onClick={prevPage} disabled={currentPage === 1}>

@@ -6,6 +6,7 @@
   height: 376px;
   width: 100%;
   color: white;
+  cursor: pointer;
 }
 .Footer_content {
   display: flex;

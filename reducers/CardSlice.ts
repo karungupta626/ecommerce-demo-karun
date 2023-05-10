@@ -2,7 +2,6 @@ import { ITypes } from '@/types/UserDetails';
 import { UserService } from '@/types/UserService';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-
 export interface CardState {
   products: ITypes[];
   status: 'idle' | 'succeeded' | 'loading' | 'failed';
@@ -20,13 +19,6 @@ export const fetchProducts = createAsyncThunk('card/fetchProducts', async () => 
   return products;
 });
 
-export const fetchProductsByRating = createAsyncThunk(
-  'card/fetchProductsByRating',
-  async ({ rating, limit }: { rating: number; limit: number }) => {
-    const products = await UserService.getProductsByRating(rating, limit);
-    return products;
-  }
-);
 export const cardSlice = createSlice({
   name: 'card',
   initialState,
@@ -44,17 +36,6 @@ export const cardSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to fetch products';
       })
-      .addCase(fetchProductsByRating.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchProductsByRating.fulfilled, (state, action) => {
-        state.status = 'succeeded'; 
-        state.products = action.payload;
-      })
-      .addCase(fetchProductsByRating.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message ?? 'Failed to fetch products';
-      });
   },
 });
 

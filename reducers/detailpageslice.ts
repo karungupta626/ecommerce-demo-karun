@@ -1,14 +1,15 @@
 import { ITypes } from '@/types/UserDetails';
+import { UserService } from '@/types/UserService';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface DetailPageState {
-  product: ITypes | null;
+  products: ITypes | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
 const initialState: DetailPageState = {
-  product: null,
+  products: null,
   status: 'idle',
   error: null,
 };
@@ -24,7 +25,7 @@ export const detailPageSlice = createSlice({
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.status = 'succeeded'; 
-        state.product = action.payload;
+        state.products = action.payload;
       })
       .addCase(fetchProductById.rejected, (state, action) => {
         state.status = 'failed';
@@ -33,11 +34,12 @@ export const detailPageSlice = createSlice({
   
   },
 });
-export const fetchProductById = createAsyncThunk('detailPage/fetchProductById', async(id) => {
-  const response = await fetch(`https://dummyjson.com/products/${id}`);
-  const data = await response.json();
-  return data;
-});
-
+export const fetchProductById = createAsyncThunk(
+  "detailPage/fetchProductById",
+  async (id: string) => {
+    const response = await UserService.getProductById(id);
+    return response.data;
+  }
+);
 
 export default detailPageSlice.reducer

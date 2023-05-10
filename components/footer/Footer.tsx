@@ -8,8 +8,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Footer.module.css";
 import { Divider } from "antd";
+import { useRouter } from "next/router";
 
 export default function Footer() {
+  const router = useRouter();
   return (
     <>
       <div className={`container-fluid ${styles.Footer_mainDiv}`}>
@@ -36,9 +38,9 @@ export default function Footer() {
           <div className={styles.Footer_frame3}>
             <div className={styles.menuItem1}>Account</div>
             <div className={styles.menuItem2}>My Account</div>
-            <div className={styles.menuItem3}>Login/Register</div>
-            <div className={styles.menuItem4}>Cart</div>
-            <div className={styles.menuItem5}>Wishlist</div>
+            <div className={styles.menuItem3} onClick={() => router.push("/LoginPage")} >Login/Register</div>
+            <div className={styles.menuItem4} onClick={() => router.push("/ShoppingCartPage")}>Cart</div>
+            <div className={styles.menuItem5} onClick={() => router.push("/WishlistPage")}>Wishlist</div>
             <div className={styles.menuItem6}>Shop</div>
           </div>
           <div className={styles.Footer_frame4}>

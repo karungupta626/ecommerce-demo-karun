@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ product }: CardProps) => {
     <div className={styles.cardWrapper}>
       <div className={styles.card}>
         <div className={styles.cardImageWrapper}>
-          <Link href={`/DetailPage/${product.id}`}>
+        <Link href={`/DetailPage/${product.id}`}>
             <img
               src={product.thumbnail}
               alt={product.title}

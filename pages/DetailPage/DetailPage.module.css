@@ -1,2 +1,109 @@
-
-  
+.detailPageMainDiv {
+  margin-top: 80px;
+  margin-bottom: 140px;
+  display: flex;
+}
+.detailPageHeaderDiv{
+  margin-top: 80px;
+  color: grey;
+}
+.HeaderTitle{
+  color: black;
+  text-decoration: underline;
+}
+.detailPage_featuredDiv {
+  font-size: 16px;
+  font-weight: bold;
+  color: #db4444;
+  margin-bottom: 60px;
+}
+.detailPageImageDiv {
+  height: 600px;
+  width: 500px;
+  background-color: #f5f5f5;
+  margin-right: 70px;
+  margin-left: 30px;
+}
+.detailPageSmallImagesDiv {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.detailPageBuynowDiv{
+  display: flex;
+  margin-bottom: 40px;
+}
+.detailPageSmallImages {
+  width: 170px;
+  height: 138px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detailPageBrand{
+  color: darkslategrey;
+  margin-bottom: 5px;
+  font-size: medium;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+}
+.detailPageSmallImages img {
+  width: 121px;
+  height: 114px;
+  margin: 10px;
+}
+.buyNowButton {
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #db4444;
+  width: 145px;
+  height: 35px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.favoriteButton {
+  border: 1px solid #db4444;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+}
+.image {
+  height: 315px;
+  width: 450px;
+  margin-top: 150px;
+  margin-left: 27px;
+}
+.detailPagetitleDiv{
+    font-size: 24px;
+    font-weight: bold;
+}
+.detailPageSubHeadDiv{
+    font-size: 16px;
+}
+.detailPageStock{
+    color: rgb(17, 184, 17);
+}
+.detailPagePriceDiv{
+    font-size: 24px;
+    color: #db4444;
+}
+.detailPageDescription{
+    font-size: 16px;
+    text-align: justify;
+  text-justify: inter-word;
+  word-wrap: break-word;
+}
+.star {
+  font-weight: bold;
+  margin-right: 2px;
+  font-size: 16px;
+  color: #ffd700;
+}

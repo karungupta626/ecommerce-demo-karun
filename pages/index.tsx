@@ -48,6 +48,7 @@ export default function Home() {
         <div className={styles.index_flashSalesDiv}>
           <FlashSales />
         </div>
+        <Divider />
         <div className={styles.index_categoriesDiv}>
           <BrowseByCategories />
         </div>
