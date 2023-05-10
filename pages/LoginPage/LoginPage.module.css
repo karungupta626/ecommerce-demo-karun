@@ -1,0 +1,24 @@
+.LoginPage_container {
+  display: flex;
+  align-items: center;
+  margin-top: 70px;
+  margin-bottom: 140px;
+}
+.LoginPage_imageDiv{
+    padding-right: 129px;
+}
+.inputDivForget{
+    margin-left: 100px;
+    text-decoration: underline;
+    color: #db4444;
+}
+.LoginPage_inputDivEmail, .LoginPage_inputDivPassword{
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
+.inputDivError{
+    color: red;
+    font-size: medium;
+    font-weight:bold;
+}

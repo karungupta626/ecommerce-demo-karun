@@ -1,0 +1,16 @@
+.flashSales_mainDiv {
+  margin-bottom: 140px;
+}
+.flashSales_featuredDiv {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #db4444;
+}
+.flashSales_flashSalesDiv {
+  font-size: 33px;
+  font-weight: bold;
+}
+.flashSales_timerDiv {
+  margin-left: 190px;
+}
