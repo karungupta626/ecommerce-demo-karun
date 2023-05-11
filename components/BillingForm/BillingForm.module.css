@@ -1,0 +1,63 @@
+.billingFormWrapper {
+  display: flex;
+}
+.formWrapper {
+  width: 470px;
+  color: grey;
+  margin-right: 170px;
+}
+.formInputDiv {
+  margin-top: 5px;
+  margin-bottom: 3px;
+  display: block;
+  width: 470px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #eceaea;
+}
+.error {
+  color: red;
+}
+.saveInfoDiv {
+  color: black;
+}
+.billWrapper {
+  width: 527px;
+}
+.cartItemDiv {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.subTotal,
+.shipping,
+.Total {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.paymentDiv , .couponImageDiv, .grandTotal {
+  margin-bottom: 32px;
+}
+.cartFooterButton {
+  margin-bottom: 30px;
+  background-color: #db4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+}
+.flexibleDiv{
+  display: flex;
+  justify-content: space-between;
+}
+.option1,.option2 {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold; 
+}

@@ -79,7 +79,7 @@ const DetailPage = () => {
             <Divider />
             <div className={styles.detailPageBuynowDiv}>
               <div className={styles.detailPageQuantityDiv}>
-                <button className={styles.quantityButton}>-</button>
+                {/* <button className={styles.quantityButton}>-</button> */}
                 <input
                   className={styles.quantityInput}
                   type="number"
@@ -87,13 +87,13 @@ const DetailPage = () => {
                   min={1}
                   max={10}
                 />
-                <button className={styles.quantityButton}>+</button>
+                {/* <button className={styles.quantityButton}>+</button> */}
               </div>
               <div className={styles.detailPageQuantityButton}>
                 <button className={styles.buyNowButton}>Buy Now</button>
               </div>
               <div className={styles.detailPageFavoriteButton}>
-                <button className={styles.favoriteButton}>
+                <button className={styles.favoriteButton} onClick={()=>router.push("/WishlistPage")}>
                   <FontAwesomeIcon icon={faHeart} />
                 </button>
               </div>

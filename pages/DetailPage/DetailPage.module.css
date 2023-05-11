@@ -55,12 +55,17 @@
   height: 114px;
   margin: 10px;
 }
+.quantityInput{
+  width: 125px;
+  height: 45px;
+
+}
 .buyNowButton {
   margin-left: 15px;
   margin-right: 15px;
   background-color: #db4444;
   width: 145px;
-  height: 35px;
+  height: 45px;
   border: none;
   color: white;
   font-size: 16px;

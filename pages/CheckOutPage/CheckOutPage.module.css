@@ -1,0 +1,18 @@
+.checkoutHeaderDiv {
+  margin-top: 80px;
+  color: grey;
+  margin-bottom: 80px;
+}
+.HeaderTitle {
+  color: black;
+  text-decoration: underline;
+}
+.checkoutMainDiv {
+  display: flex;
+  margin-bottom: 180px;
+}
+.heading {
+  margin-bottom: 40px;
+}
+
+

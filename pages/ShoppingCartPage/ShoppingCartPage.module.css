@@ -1,0 +1,95 @@
+.cartHeaderDiv {
+  margin-top: 80px;
+  color: grey;
+  margin-bottom: 80px;
+}
+.HeaderTitle {
+  color: black;
+  text-decoration: underline;
+}
+.cartMainHeadDiv,
+.cartMainQuantityDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 16px 40px;
+  margin: 0 40px;
+  margin-bottom: 40px;
+}
+.cartMainDiv {
+  margin-bottom: 80px;
+}
+.cartMainButtonDiv {
+  display: flex;
+  margin-left: 40px;
+}
+.updateButtonDiv {
+  margin-left: 920px;
+  font-weight: 650;
+}
+.returnButtonDiv {
+  font-weight: 650;
+}
+.quantitySpan {
+  width: 50px;
+  height: 35px;
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
+}
+.cartFooterDiv {
+  display: flex;
+  margin-left: 40px;
+  margin-bottom: 180px;
+}
+.cartFooterTotalDiv {
+  margin-left: 220px;
+  border: 1px solid black;
+  height: 324px;
+  width: 470px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartFooterSubTotal {
+  margin-left: 24px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.cartFooterCartTotal {
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.cartFooterTotal {
+  margin-left: 24px;
+  margin-right: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+.cartFooterShipping {
+  margin-left: 24px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.cartFooterButton {
+  margin-left: 100px;
+  margin-bottom: 30px;
+  background-color: #db4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 260px;
+  height: 45px;
+}

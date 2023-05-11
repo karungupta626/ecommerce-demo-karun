@@ -4,6 +4,7 @@ export interface User {
   password: string;
 }
 export interface ITypes {
+  productId: number;
   sold: any;
   data: any;
   id: number;
