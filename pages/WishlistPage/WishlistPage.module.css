@@ -3,7 +3,7 @@
 }
 .heading{
   margin-bottom: 60px;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
 }
 .cardsWrapper{
@@ -17,7 +17,23 @@
 }
 .headingWrapper{
     display: flex;
+    justify-content: space-between;
 }
-.headingButton{
-    margin-left: 950px;
-}
+
+.pagination button {
+    background-color: #f5f5f5;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+  .card_Div {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 60px;
+    margin-bottom: 80px;
+    height: 400px;
+  }
+  

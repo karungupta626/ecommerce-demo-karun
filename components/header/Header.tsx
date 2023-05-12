@@ -17,7 +17,7 @@ export default function Header() {
     router.push(`/SearchPage?keyword=${keyword}`);
   };
 
-  const wishlist = useSelector((state: RootState) => state.wishlist.items);
+  const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
 
   return (
     <>
@@ -48,7 +48,9 @@ export default function Header() {
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </form>
-          <Badge badgeContent={wishlist.length} color="secondary" className={styles.faHeartBadge}>
+          <Badge 
+          badgeContent={wishlist.length} 
+          color="secondary" className={styles.faHeartBadge}>
             
               <FontAwesomeIcon icon={faHeart}  onClick={() => router.push("/WishlistPage")}/>
           </Badge>

@@ -1,70 +1,72 @@
+import Explore from "@/components/Explore/Explore";
+import styles from "./WishlistPage.module.css";
+import { fetchWishlist } from "@/reducers/WishlistSlice";
+import { AppDispatch, RootState } from "@/store";
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "@/store";
+import WishlistCard from "@/components/Cards/WishlistCard";
 import { ITypes } from "@/types/UserDetails";
-import { fetchWishlist, removeFromWishlist } from "@/reducers/WishlistSlice";
 import Card from "@/components/Cards/Card";
-import Explore from "@/components/Explore/Explore";
-import { Button } from "@mui/material";
-import axios from "axios";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "./WishlistPage.module.css";
 
-const WishlistPage: React.FC = () => {
+const WishlistPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { items, loading, error } = useSelector(
+  const { wishlist, loading } = useSelector(
     (state: RootState) => state.wishlist
   );
-  const [products, setProducts] = useState<ITypes[]>([]);
+  const sorted = wishlist.flatMap((item) => item.product);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(8);
+
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = sorted?.slice(indexOfFirstCard, indexOfLastCard);
+
+  const totalPages = Math.ceil(wishlist?.length / cardsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchWishlist());
   }, [dispatch]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await Promise.all(
-        items.map((item) => {
-          return axios
-            .get<ITypes>(`https://dummyjson.com/products/${item.productId}`)
-            .then((response) => response.data);
-        })
-      );
-      setProducts(products);
-    };
-
-    fetchProducts();
-  }, [items]);
-
-  const handleRemove = (productId: number) => {
-    dispatch(removeFromWishlist(productId));
-  };
-
   return (
     <div className={`container ${styles.wrapper}`}>
       <div className={styles.headingWrapper}>
-        <div className={styles.heading}>
-          My Wishlist ({items.length}){" "}
-        </div>
+        <div className={styles.heading}>My Wishlist ({wishlist.length})</div>
         <div className={styles.headingButton}>
           <Button variant="outlined" color="inherit">
             Move To Bag
           </Button>
         </div>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : items.length === 0 ? (
-        <p>Your wishlist is empty</p>
-      ) : (
-        <div className={styles.cardsWrapper}>
-          {products.map((product: ITypes) => (
-            <Card key={product.id} product={product} />
-          ))}
+        <div className={styles.pagination}>
+          <button onClick={prevPage} disabled={currentPage === 1}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          &nbsp;&nbsp;
+          <button onClick={nextPage} disabled={currentPage === totalPages}>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
         </div>
-      )}
+      </div>
+      <div className={styles.card_Div}>
+        {currentCards?.map((product: ITypes) => (
+          <WishlistCard key={product.id} product={product} />
+        ))}
+      </div>
       <div className={styles.Wishlist_cardDiv}>
         <Explore />
       </div>

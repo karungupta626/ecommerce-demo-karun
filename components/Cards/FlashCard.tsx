@@ -7,8 +7,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { AppDispatch } from "@/store";
-import { addToWishlist } from "@/reducers/WishlistSlice";
 import { useDispatch } from "react-redux";
+import { addToWishlist } from "@/reducers/WishlistSlice";
+import axios from "axios";
 
 export interface FlashCardProps {
   product: ITypes;
@@ -18,10 +19,25 @@ export interface FlashCardProps {
 const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
+  const handleAddToCart =() =>{
+    router.push("/ShoppingCartPage");
+  }
 
-  const handleAddToWishlist = () => {
-    dispatch(addToWishlist(product.id));
-    router.push("/WishlistPage");
+  const handleAddToWishlist = async () => {
+    try {
+      const response = await axios.post(
+        "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist",
+        {
+          userId: 1,
+          product: product,
+        }
+      );
+      const wishlistItem = response.data;
+      dispatch(addToWishlist(wishlistItem));
+      router.push("/WishlistPage");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className={styles.cardWrapper}>
@@ -46,7 +62,7 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
             <FontAwesomeIcon className={styles.buttonFa} icon={faEye} />
           </div>
         </div>
-        <button className={styles.button}>Add to Cart</button>
+        <button className={styles.button} onClick={handleAddToCart}>Add to Cart</button>
         <div className={styles.descriptionDiv}>
           <h2 className={styles.name}>{product.title}</h2>
           <div className={styles.priceContainer}>

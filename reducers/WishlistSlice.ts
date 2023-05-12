@@ -1,20 +1,26 @@
-import { AppDispatch, RootState } from "@/store";
-import { WishlistService } from "@/types/WishlistService";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AppThunk } from "../store";
 
-interface IWishlistItem {
-  id: number;
-  productId: number;
-}
+import { ITypes } from "@/types/UserDetails";
+import axios from "axios";
 
-interface IWishlistState {
-  items: IWishlistItem[];
+interface WishlistState {
+  wishlist: WishlistItem[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: IWishlistState = {
-  items: [],
+interface WishlistItem {
+  id: string;
+  userId: string;
+  name: string;
+  image: string;
+  price: number;
+  product: ITypes;
+}
+
+const initialState: WishlistState = {
+  wishlist: [],
   loading: false,
   error: null,
 };
@@ -23,39 +29,23 @@ const wishlistSlice = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
-    addToWishlistStart(state) {
+    addToWishlist(state, action: PayloadAction<WishlistItem>) {
+      state.wishlist.push(action.payload);
+    },
+    removeFromWishlist(state, action: PayloadAction<string>) {
+      state.wishlist = state.wishlist.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+    wishlistLoading(state) {
       state.loading = true;
       state.error = null;
     },
-    addToWishlistSuccess(state, action: PayloadAction<IWishlistItem>) {
-      state.items.push(action.payload);
+    wishlistLoaded(state, action: PayloadAction<WishlistItem[]>) {
+      state.wishlist = action.payload;
       state.loading = false;
     },
-    addToWishlistFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    removeFromWishlistStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    removeFromWishlistSuccess(state, action: PayloadAction<number>) {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-      state.loading = false;
-    },
-    removeFromWishlistFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    getWishlistStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    getWishlistSuccess(state, action: PayloadAction<IWishlistItem[]>) {
-      state.items = action.payload;
-      state.loading = false;
-    },
-    getWishlistFailure(state, action: PayloadAction<string>) {
+    wishlistError(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -63,50 +53,51 @@ const wishlistSlice = createSlice({
 });
 
 export const {
-  addToWishlistStart,
-  addToWishlistSuccess,
-  addToWishlistFailure,
-  removeFromWishlistStart,
-  removeFromWishlistSuccess,
-  removeFromWishlistFailure,
-  getWishlistStart,
-  getWishlistSuccess,
-  getWishlistFailure,
+  addToWishlist,
+  removeFromWishlist,
+  wishlistLoading,
+  wishlistLoaded,
+  wishlistError,
 } = wishlistSlice.actions;
 
-export const addToWishlist =
-  (productId: number) => async (dispatch: AppDispatch) => {
-    dispatch(addToWishlistStart());
-    try {
-      const newItem: IWishlistItem = await WishlistService.addToWishlist(
-        productId
-      );
-      dispatch(addToWishlistSuccess(newItem));
-    } catch (error) {
-      dispatch(addToWishlistFailure((error as Error).message));
-    }
-  };
+export default wishlistSlice.reducer;
 
-export const removeFromWishlist =
-  (id: number) => async (dispatch: AppDispatch) => {
-    dispatch(removeFromWishlistStart());
-    try {
-      await WishlistService.removeFromWishlist(id);
-      dispatch(removeFromWishlistSuccess(id));
-    } catch (error) {
-      dispatch(removeFromWishlistFailure((error as Error).message));
-    }
-  };
-export const fetchWishlist = () => async (dispatch: AppDispatch) => {
-  dispatch(getWishlistStart());
+export const fetchWishlist = (): AppThunk => async (dispatch) => {
+  dispatch(wishlistLoading());
+
   try {
-    const wishlistItems = await WishlistService.getWishlist();
-    dispatch(getWishlistSuccess(wishlistItems));
+    const response = await axios.get<WishlistItem[]>(
+      "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist"
+    );
+    dispatch(wishlistLoaded(response.data));
   } catch (error) {
-    dispatch(getWishlistFailure((error as Error).message));
+    dispatch(wishlistError((error as Error).message));
   }
 };
-export const selectWishlist = (state: RootState) => state.wishlist;
-export const selectIsInWishlist = (productId: number) => (state: RootState) =>
-  state.wishlist.items.some((item) => item.productId === productId);
-export default wishlistSlice.reducer;
+
+export const addToWishlistAsync = (item: WishlistItem): AppThunk => async (
+  dispatch
+) => {
+  try {
+    const response = await axios.post<WishlistItem>(
+      "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist",
+      item
+    );
+    dispatch(addToWishlist(response.data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteFromWishlistAsync = (
+  itemId: string
+): AppThunk => async (dispatch) => {
+  try {
+    await axios.delete(
+      `https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist/${itemId}`
+    );
+    dispatch(removeFromWishlist(itemId));
+  } catch (error) {
+    console.log(error);
+  }
+};

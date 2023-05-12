@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "./ShoppingCartPage.module.css";
 import { Divider } from "antd";
 import { useRouter } from "next/router";
+import { AppDispatch } from "@/store";
+import { useDispatch } from "react-redux";
 
 export default function ShoppingCartPage() {
     const router = useRouter();

@@ -6,6 +6,7 @@ import searchReducer from '../reducers/SearchPageSlice';
 import wishlistReducer from '../reducers/WishlistSlice';
 import bestSellingProductsReducer from '../reducers/BestSellingProductSlice';
 import flashcardReducer from '../reducers/FlashCardSlice';
+import shoppingCartReducer from '../reducers/ShoppingCartSlice';
 
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     card: cardReducer,
     detailPage: detailPageReducer,
     wishlist: wishlistReducer,
+    shoppingCart: shoppingCartReducer,
 });
 export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;
