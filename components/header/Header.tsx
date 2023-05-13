@@ -18,6 +18,7 @@ export default function Header() {
   };
 
   const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
+  const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
 
   return (
     <>
@@ -48,15 +49,33 @@ export default function Header() {
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </form>
-          <Badge 
-          badgeContent={wishlist.length} 
-          color="secondary" className={styles.faHeartBadge}>
-            
-              <FontAwesomeIcon icon={faHeart}  onClick={() => router.push("/WishlistPage")}/>
-          </Badge>
-          <span className={styles.menuItem2}>
-            <FontAwesomeIcon icon={faShoppingCart} onClick={() => router.push("/ShoppingCartPage")}/>
-          </span>
+          <div className={styles.badgeDiv}>
+            <div className={styles.subBadgeDiv1}>
+              <Badge
+                badgeContent={wishlist.length}
+                color="secondary"
+                className={styles.faHeartBadge}
+              >
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  onClick={() => router.push("/WishlistPage")}
+                />
+              </Badge>
+            </div>
+            <div className={styles.subBadgeDiv2}>
+              {" "}
+              <Badge
+                badgeContent={cartItems.length}
+                color="secondary"
+                className={styles.faHeartBadge}
+              >
+                <FontAwesomeIcon
+                  icon={faShoppingCart}
+                  onClick={() => router.push("/ShoppingCartPage")}
+                />
+              </Badge>
+            </div>
+          </div>
         </div>
       </div>
       <Divider style={{ margin: 8 }} />

@@ -17,6 +17,7 @@
   padding: 16px 40px;
   margin: 0 40px;
   margin-bottom: 40px;
+  position: relative;
 }
 .cartMainDiv {
   margin-bottom: 80px;
@@ -92,4 +93,14 @@
   cursor: pointer;
   width: 260px;
   height: 45px;
+}
+.closebutton{
+  border-radius: 50%;
+  border: none;
+  color: #db4444;
+  font-size: large;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

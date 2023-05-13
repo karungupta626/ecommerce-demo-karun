@@ -1,102 +1,97 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from '@/store';
-import axios from 'axios';
-import { ITypes } from '@/types/UserDetails';
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import { ITypes } from "@/types/UserDetails";
+import axios from "axios";
 
-export interface ICartItem {
+export interface CartItem {
+  id: string;
   product: ITypes;
-  quantity: number;
+  quantity: number; 
 }
 
-export interface ICartState {
-  cartItems: ICartItem[];
-  loading: boolean;
-  error: string | null;
+interface ShoppingCartState {
+  items: CartItem[];
 }
 
-const initialState: ICartState = {
-  cartItems: [],
-  loading: false,
-  error: null,
+const initialState: ShoppingCartState = {
+  items: [],
 };
 
-export const cartSlice = createSlice({
-  name: 'cart',
+const ShoppingCartSlice = createSlice({
+  name: "ShoppingCart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<ITypes>) => {
-      const existingCartItem = state.cartItems.find(
-        (item) => item.product.id === action.payload.id,
+    addToCart(state, action: PayloadAction<CartItem>) {
+      const existingItemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id
       );
-      if (existingCartItem) {
-        existingCartItem.quantity++;
+      if (existingItemIndex !== -1) {
+        state.items[existingItemIndex].quantity++; 
       } else {
-        state.cartItems.push({ product: action.payload, quantity: 1 });
+        state.items.push(action.payload);
       }
     },
-    // removeFromCart: (state, action: PayloadAction<string>) => {
-    //   state.cartItems = state.cartItems.filter(
-    //     (item) => item.product.id !== action.payload,
-    //   );
-    // },
-    // updateCartItemQuantity: (
-    //   state,
-    //   action: PayloadAction<{ productId: string; quantity: number }>,
-    // ) => {
-    //   const existingCartItem = state.cartItems.find(
-    //     (item) => item.product.id === action.payload.productId,
-    //   );
-    //   if (existingCartItem) {
-    //     existingCartItem.quantity = action.payload.quantity;
-    //   }
-    // },
-    clearCart: (state) => {
-      state.cartItems = [];
+    removeFromCart(state, action: PayloadAction<string>) {
+      const itemIndex = state.items.findIndex((item) => item.id === action.payload);
+      if (itemIndex !== -1) {
+        state.items.splice(itemIndex, 1);
+      }
     },
-    fetchCartItemsStart: (state) => {
-      state.loading = true;
-      state.error = null;
+    deleteCartItem(state, action: PayloadAction<string>) {
+      const itemIndex = state.items.findIndex((item) => item.id === action.payload);
+      if (itemIndex !== -1) {
+        state.items.splice(itemIndex, 1);
+      }
     },
-    fetchCartItemsSuccess: (state, action: PayloadAction<ICartItem[]>) => {
-      state.cartItems = action.payload;
-      state.loading = false;
-      state.error = null;
+    updateCartItemQuantity(state, action: PayloadAction<{ id: string; quantity: number }>) {
+      const existingItem = state.items.find((item) => item.id === action.payload.id);
+      if (existingItem) {
+        existingItem.quantity = action.payload.quantity;
+      }
     },
-    fetchCartItemsFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload;
+    setCartItems(state, action: PayloadAction<CartItem[]>) {
+      state.items = action.payload;
     },
   },
 });
 
 export const {
   addToCart,
-//   removeFromCart,
-//   updateCartItemQuantity,
-  clearCart,
-  fetchCartItemsStart,
-  fetchCartItemsSuccess,
-  fetchCartItemsFailure,
-} = cartSlice.actions;
+  removeFromCart,
+  deleteCartItem,
+  updateCartItemQuantity,
+  setCartItems, 
+} = ShoppingCartSlice.actions;
 
-export const fetchCartItemsAsync = (): AppThunk => async (dispatch) => {
-  try {
-    dispatch(fetchCartItemsStart());
-    const response = await axios.get<ICartItem[]>(
-      'https://645dfaea12e0a87ac0e467db.mockapi.io/cart',
-    );
-    dispatch(fetchCartItemsSuccess(response.data));
-  } catch (error) {
-    dispatch(fetchCartItemsFailure((error as Error).message));
-  }
-};
+export default ShoppingCartSlice.reducer;
 
-export const saveCartItemsAsync = (cartItems: ICartItem[]): AppThunk => async () => {
+export const fetchCartItems = () => async (dispatch: Dispatch) => {
   try {
-    await axios.put('https://645dfaea12e0a87ac0e467db.mockapi.io/cart', cartItems);
+    const response = await axios.get("https://645dfaea12e0a87ac0e467db.mockapi.io/cart");
+    const cartItems: CartItem[] = response.data;
+    dispatch(setCartItems(cartItems));
   } catch (error) {
     console.error(error);
   }
 };
 
-export default cartSlice.reducer;
+export const addCartItem = (cartItem: CartItem) => async (dispatch: Dispatch) => {
+  try {
+    const response = await axios.post(
+      "https://645dfaea12e0a87ac0e467db.mockapi.io/cart",
+      cartItem
+    );
+    const addedCartItem: CartItem = response.data;
+    dispatch(addToCart(addedCartItem));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const removeCartItem = (cartItemId: string) => async (dispatch: Dispatch) => {
+  try {
+    await axios.delete(`https://645dfaea12e0a87ac0e467db.mockapi.io/cart/${cartItemId}`);
+    dispatch(deleteCartItem(cartItemId));
+  } catch (error) {
+    console.error(error);
+  }
+};

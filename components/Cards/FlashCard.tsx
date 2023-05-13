@@ -10,6 +10,7 @@ import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "@/reducers/WishlistSlice";
 import axios from "axios";
+import { CartItem, addCartItem, addToCart } from "@/reducers/ShoppingCartSlice";
 
 export interface FlashCardProps {
   product: ITypes;
@@ -19,9 +20,19 @@ export interface FlashCardProps {
 const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const handleAddToCart =() =>{
-    router.push("/ShoppingCartPage");
-  }
+  const handleAddToCart = async () => {
+    try {
+      const cartItem: CartItem = {
+        product: product,
+        quantity: 1,
+        id: "",
+      };
+      await dispatch(addCartItem(cartItem));
+      router.push("/ShoppingCartPage");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleAddToWishlist = async () => {
     try {

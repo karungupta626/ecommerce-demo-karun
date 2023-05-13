@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { deleteFromWishlistAsync } from "@/reducers/WishlistSlice";
 import { useRouter } from "next/router";
+import { CartItem, addCartItem } from "@/reducers/ShoppingCartSlice";
 export interface CardProps {
   product: ITypes;
 }
@@ -18,9 +19,19 @@ export default function WishlistCard({ product }: CardProps) {
       dispatch(deleteFromWishlistAsync(product.id.toString()));
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
+      try {
+        const cartItem: CartItem = {
+          product: product,
+          quantity: 1,
+          id: "",
+        };
+        await dispatch(addCartItem(cartItem));
         router.push("/ShoppingCartPage");
-      };
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
   return (
     <div className={styles.cardWrapper}>

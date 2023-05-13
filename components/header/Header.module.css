@@ -17,8 +17,11 @@
 .menuItem{
   margin-right: 35px;
 }
-.menuItem2{
-  margin-left: 35px;
+.badgeDiv{
+  display: flex;
+}
+.subBadgeDiv1{
+  margin-right: 30px;
 }
 .Header_frame3 {
   display: flex;

@@ -7,6 +7,8 @@ import { Divider, Radio } from "antd";
 import { FormControl, FormLabel } from "react-bootstrap";
 import Image from "next/image";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 export default function BillingForm() {
   const {
@@ -14,6 +16,8 @@ export default function BillingForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
+  const user = useSelector((state : RootState ) => state.auth.user)
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -29,6 +33,7 @@ export default function BillingForm() {
               type="text"
               {...register("firstName", { required: true })}
               className={styles.formInputDiv}
+              defaultValue={user?.firstName}
             />
             {errors.firstName && (
               <>
@@ -42,6 +47,7 @@ export default function BillingForm() {
               type="email"
               {...register("email", { required: true })}
               className={styles.formInputDiv}
+              defaultValue={user?.email}
             />
             {errors.email && (
               <>
@@ -55,6 +61,7 @@ export default function BillingForm() {
               type="text"
               {...register("companyName", { required: true })}
               className={styles.formInputDiv}
+              // defaultValue={user?.}
             />
             {errors.lastName && (
               <>
@@ -68,6 +75,7 @@ export default function BillingForm() {
               type="tel"
               {...register("phone", { required: true })}
               className={styles.formInputDiv}
+              // defaultValue={user?.}
             />
             {errors.phone && (
               <>
@@ -81,6 +89,7 @@ export default function BillingForm() {
               type="text"
               {...register("postalcode", { required: true })}
               className={styles.formInputDiv}
+              // defaultValue={user?.}
             />
             {errors.phone && (
               <>
@@ -94,6 +103,7 @@ export default function BillingForm() {
               type="text"
               {...register("Address")}
               className={styles.formInputDiv}
+              // defaultValue={user?.address?.address}
             />
 
             <label htmlFor="city">Town / City</label>
@@ -101,6 +111,7 @@ export default function BillingForm() {
               type="text"
               {...register("city", { required: true })}
               className={styles.formInputDiv}
+              // defaultValue={user?.address?.city ?? ''}
             />
             {errors.address && (
               <>
