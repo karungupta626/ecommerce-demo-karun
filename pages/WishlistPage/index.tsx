@@ -10,7 +10,7 @@ import { ITypes } from "@/types/UserDetails";
 import Card from "@/components/Cards/Card";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { addToCart } from "@/reducers/ShoppingCartSlice";
 
 const WishlistPage = () => {
   const dispatch: AppDispatch = useDispatch();

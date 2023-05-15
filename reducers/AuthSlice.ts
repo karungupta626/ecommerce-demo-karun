@@ -8,7 +8,8 @@ interface AuthState {
   isAuthenticated: boolean;
 }
 
-const userFromStorage = typeof window !== 'undefined' && localStorage.getItem("user");
+const userFromStorage =
+  typeof window !== "undefined" && localStorage.getItem("user");
 
 const initialState: AuthState = {
   user: userFromStorage ? JSON.parse(userFromStorage) : null,
@@ -16,7 +17,6 @@ const initialState: AuthState = {
   error: null,
   isAuthenticated: !!userFromStorage,
 };
-
 
 export const loginUserAsync = createAsyncThunk(
   "auth/login",
@@ -37,6 +37,10 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk("auth/logout", async () => {
+  localStorage?.removeItem("user");
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -48,7 +52,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.user = action.payload;
+        state.user = action.payload as User;
         state.isAuthenticated = true;
         localStorage?.setItem("user", JSON.stringify(action.payload));
       })
@@ -56,6 +60,19 @@ export const authSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message ?? "Error logging in";
         state.isAuthenticated = false;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.status = "succeeded";
+        state.user = null;
+        state.isAuthenticated = false;
+        state.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error logging out";
       });
   },
 });

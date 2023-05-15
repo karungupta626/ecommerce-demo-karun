@@ -2,26 +2,29 @@ import { FormControlLabel } from "@mui/material";
 import { Checkbox } from "antd";
 import { useForm } from "react-hook-form";
 import styles from "./BillingForm.module.css";
-import { RadioGroup } from "@mui/material";
-import { Divider, Radio } from "antd";
-import { FormControl, FormLabel } from "react-bootstrap";
+import { Divider } from "antd";
 import Image from "next/image";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
-
 export default function BillingForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
-  const user = useSelector((state : RootState ) => state.auth.user)
+
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
+
+  const subtotal = cartItems.reduce(
+    (total, item) => total + item.product.price * item.quantity,
+    0
+  );
 
   return (
     <>
@@ -61,8 +64,8 @@ export default function BillingForm() {
               type="text"
               {...register("companyName", { required: true })}
               className={styles.formInputDiv}
-              // defaultValue={user?.}
             />
+
             {errors.lastName && (
               <>
                 <span className={styles.error}>Company Name is Required</span>
@@ -75,7 +78,6 @@ export default function BillingForm() {
               type="tel"
               {...register("phone", { required: true })}
               className={styles.formInputDiv}
-              // defaultValue={user?.}
             />
             {errors.phone && (
               <>
@@ -89,7 +91,6 @@ export default function BillingForm() {
               type="text"
               {...register("postalcode", { required: true })}
               className={styles.formInputDiv}
-              // defaultValue={user?.}
             />
             {errors.phone && (
               <>
@@ -103,7 +104,6 @@ export default function BillingForm() {
               type="text"
               {...register("Address")}
               className={styles.formInputDiv}
-              // defaultValue={user?.address?.address}
             />
 
             <label htmlFor="city">Town / City</label>
@@ -111,7 +111,6 @@ export default function BillingForm() {
               type="text"
               {...register("city", { required: true })}
               className={styles.formInputDiv}
-              // defaultValue={user?.address?.city ?? ''}
             />
             {errors.address && (
               <>
@@ -120,35 +119,33 @@ export default function BillingForm() {
               </>
             )}
             <br />
-            <div className={styles.saveInfoDiv}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Save this information for faster check-out next time"
-              />
-            </div>
 
-            {/* <button type="submit">Submit</button> */}
+            <button type="submit" className={styles.cartSubmitButton}>
+            Place Order
+          </button>
           </form>
         </div>
         <div className={styles.billWrapper}>
-          <div className={styles.cartItemDiv}>
-            <div className={styles.imageCartItem}>
-              <Image
-                src="/categoryRectangle.png"
-                width={54}
-                height={54}
-                alt="Coupon"
-              />
+          {cartItems.map((item, index) => (
+            <div className={styles.cartItemDiv} key={index}>
+              <div className={styles.imageCartItem}>
+                <img
+                  src={item.product.thumbnail}
+                  width={54}
+                  height={54}
+                  alt={item.product.title}
+                />
+              </div>
+              <div className={styles.nameCartItem}>{item.product.title}</div>
+              <div className={styles.totalCartItem}>
+                ${item.product.price * item.quantity}
+              </div>
             </div>
-            <div className={styles.nameCartItem}>LCD Monitor</div>
-            <div className={styles.totalCartItem}>$650</div>
-          </div>
-          <br />
-          <br />
+          ))}
           <div className={styles.grandTotal}>
             <div className={styles.subTotal}>
               <span>Subtotal:</span>
-              <span>$1750</span>
+              <span>${subtotal}</span>
             </div>
             <Divider />
             <div className={styles.shipping}>
@@ -158,35 +155,33 @@ export default function BillingForm() {
             <Divider />
             <div className={styles.Total}>
               <span>Total:</span>
-              <span>$1750</span>
+              <span>${subtotal}</span>
             </div>
           </div>
           <div className={styles.paymentDiv}>
             <div className={styles.flexibleDiv}>
-            <div className={styles.option1}>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="Bank"
-                id="bank"
-                checked
-              />&nbsp;&nbsp;
-              <label htmlFor="Bank">Bank</label>
+              <div className={styles.option1}>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Bank"
+                  id="bank"
+                  checked
+                />
+                &nbsp;&nbsp;
+                <label htmlFor="Bank">Bank</label>
+              </div>
+              <div className={styles.bankImage}>
+                <Image src="/bank1.png" width={42} height={28} alt="Bank1" />
+                <Image src="/bank2.png" width={42} height={28} alt="Bank2" />
+                <Image src="/bank3.png" width={42} height={28} alt="Bank3" />
+                <Image src="/bank4.png" width={42} height={28} alt="Bank4" />
+              </div>
             </div>
-            <div className={styles.bankImage}>
-                <Image src="/bank1.png" width={42} height={28} alt="Bank1"/>
-                <Image src="/bank2.png" width={42} height={28} alt="Bank2"/>
-                <Image src="/bank3.png" width={42} height={28} alt="Bank3"/>
-                <Image src="/bank4.png" width={42} height={28} alt="Bank4"/>
-            </div>
-            </div><br/>
+            <br />
             <div className={styles.option1}>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="Cash"
-                id="cash"
-              />&nbsp;&nbsp;
+              <input type="radio" name="paymentMethod" value="Cash" id="cash" />
+              &nbsp;&nbsp;
               <label htmlFor="Cash">Cash On Dilevery</label>
             </div>
           </div>
@@ -194,7 +189,9 @@ export default function BillingForm() {
           <div className={styles.couponImageDiv}>
             <Image src="/coupon.png" width={527} height={56} alt="Coupon" />
           </div>
-          <button type="submit" className={styles.cartFooterButton}>Place Order</button>
+          {/* <button type="submit" className={styles.cartFooterButton}>
+            Place Order
+          </button> */}
         </div>
       </div>
     </>

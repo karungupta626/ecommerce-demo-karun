@@ -1,6 +1,6 @@
 import { ITypes } from '@/types/UserDetails';
 import { UserService } from '@/types/UserService';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 interface DetailPageState {
   products: ITypes | null;

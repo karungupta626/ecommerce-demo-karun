@@ -19,13 +19,14 @@
 .error {
   color: red;
 }
-.saveInfoDiv {
-  color: black;
-}
+
 .billWrapper {
+  margin-top: 50px;
   width: 527px;
 }
 .cartItemDiv {
+  color: #575555;
+  margin-bottom: 30px;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -40,8 +41,11 @@
 .paymentDiv , .couponImageDiv, .grandTotal {
   margin-bottom: 32px;
 }
-.cartFooterButton {
+.cartSubmitButton {
+  align-self: center;
   margin-bottom: 30px;
+  margin-top: 30px;
+  margin-left: 35%;
   background-color: #db4444;
   color: white;
   border: none;
