@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import styles from "./ErrorPage.module.css";
-
 const ErrorPage = () => {
   return (
     <div className={styles.ErrorPage_mainDiv}>

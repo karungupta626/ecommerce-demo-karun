@@ -7,11 +7,13 @@ import wishlistReducer from '../reducers/WishlistSlice';
 import bestSellingProductsReducer from '../reducers/BestSellingProductSlice';
 import flashcardReducer from '../reducers/FlashCardSlice';
 import shoppingCartReducer from '../reducers/ShoppingCartSlice';
+import categoriesReducer from '../reducers/CategoriesSlice';
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
     search: searchReducer,
+    categories: categoriesReducer,
     flashcard: flashcardReducer,
     bestSellingProducts: bestSellingProductsReducer,
     card: cardReducer,

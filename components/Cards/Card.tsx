@@ -11,12 +11,10 @@ import { addToWishlist } from "@/reducers/WishlistSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { CartItem, addCartItem, addToCart } from "@/reducers/ShoppingCartSlice";
-
 export interface CardProps {
   product: ITypes;
   data?: any;
 }
-
 const Card: React.FC<CardProps> = ({ product }: CardProps) => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
@@ -33,7 +31,6 @@ const Card: React.FC<CardProps> = ({ product }: CardProps) => {
       console.error(error);
     }
   };
-
   const handleAddToWishlist = async () => {
     try {
       const response = await axios.post(
@@ -70,7 +67,9 @@ const Card: React.FC<CardProps> = ({ product }: CardProps) => {
             <FontAwesomeIcon className={styles.buttonFa} icon={faEye} />
           </div>
         </div>
-        <button className={styles.button} onClick={handleAddToCart}>Add to Cart</button>
+        <button className={styles.button} onClick={handleAddToCart}>
+          Add to Cart
+        </button>
         <div className={styles.descriptionDiv}>
           <h2 className={styles.name}>{product.title}</h2>
           <div className={styles.priceContainer}>
@@ -88,5 +87,4 @@ const Card: React.FC<CardProps> = ({ product }: CardProps) => {
     </div>
   );
 };
-
 export default Card;

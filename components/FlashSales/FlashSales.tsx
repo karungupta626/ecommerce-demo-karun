@@ -7,7 +7,6 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ITypes } from '@/types/UserDetails';
 import FlashCard from '../Cards/FlashCard';
-
 export default function FlashSales() {
   const dispatch: AppDispatch = useDispatch();
   const { products, status, error } = useSelector(
@@ -15,37 +14,29 @@ export default function FlashSales() {
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(4);
-
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = products?.slice(indexOfFirstCard, indexOfLastCard);
-
   const totalPages = Math.ceil((products?.length || 0) / cardsPerPage);
-
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
-
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
-
   useEffect(() => {
     dispatch(fetchFlashCardData(10));
   }, [dispatch]);
-
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
-
   if (status === 'failed') {
     return <div>{error}</div>;
   }
-
   return (
     <>
       <div className={styles.flashSales_mainDiv}>

@@ -8,12 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "@/store";
 import { loginUserAsync } from "@/reducers/AuthSlice";
-
+import Image from "next/image";
 interface LoginForm {
   username: string;
   password: string;
 }
-
 export default function LoginPage() {
   const { register, handleSubmit } = useForm<LoginForm>();
   const dispatch: AppDispatch = useDispatch();
@@ -23,7 +22,6 @@ export default function LoginPage() {
     (state: RootState) => state.auth.isAuthenticated
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
   useEffect(() => {
     if (isAuthenticated) {
     router.push("/");
@@ -42,7 +40,7 @@ export default function LoginPage() {
     <>
       <div className={styles.LoginPage_container}>
         <div className={styles.LoginPage_imageDiv}>
-          <img
+          <Image
             src="/loginpageimage.png"
             alt="App Store"
             width="781"

@@ -1,8 +1,9 @@
-import styles from "./TopHeader.module.css";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown} from "@fortawesome/free-solid-svg-icons";
-
+import { faAngleDown, faMoon } from "@fortawesome/free-solid-svg-icons";
+import styles from "./TopHeader.module.css";
 export default function TopHeader() {
+
   return (
     <>
       <div className={`container-fluid ${styles.topHeader_mainDiv}`}>

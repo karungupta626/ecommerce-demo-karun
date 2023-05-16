@@ -10,7 +10,7 @@ interface WishlistState {
   error: string | null;
 }
 
-interface WishlistItem {
+ export interface WishlistItem {
   id: string;
   userId: string;
   name: string;

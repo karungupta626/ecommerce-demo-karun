@@ -1,5 +1,4 @@
-import { FormControlLabel } from "@mui/material";
-import { Checkbox } from "antd";
+
 import { useForm } from "react-hook-form";
 import styles from "./BillingForm.module.css";
 import { Divider } from "antd";
@@ -12,20 +11,15 @@ export default function BillingForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const user = useSelector((state: RootState) => state.auth.user);
-
   const onSubmit = (data: any) => {
     console.log(data);
   };
-
   const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
-
   const subtotal = cartItems.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0
   );
-
   return (
     <>
       <div className={styles.billingFormWrapper}>
@@ -44,7 +38,6 @@ export default function BillingForm() {
                 <br />
               </>
             )}
-
             <label htmlFor="email">Email Address</label>
             <input
               type="email"
@@ -58,21 +51,18 @@ export default function BillingForm() {
                 <br />
               </>
             )}
-
             <label htmlFor="companyName">Company Name</label>
             <input
               type="text"
               {...register("companyName", { required: true })}
               className={styles.formInputDiv}
             />
-
             {errors.lastName && (
               <>
                 <span className={styles.error}>Company Name is Required</span>
                 <br />
               </>
             )}
-
             <label htmlFor="phone">Phone Number</label>
             <input
               type="tel"
@@ -85,7 +75,6 @@ export default function BillingForm() {
                 <br />
               </>
             )}
-
             <label htmlFor="postalcode">Postal Code</label>
             <input
               type="text"
@@ -98,14 +87,12 @@ export default function BillingForm() {
                 <br />
               </>
             )}
-
             <label htmlFor="address">Apartment, Floor , etc. (optional)</label>
             <input
               type="text"
               {...register("Address")}
               className={styles.formInputDiv}
             />
-
             <label htmlFor="city">Town / City</label>
             <input
               type="text"
@@ -119,7 +106,6 @@ export default function BillingForm() {
               </>
             )}
             <br />
-
             <button type="submit" className={styles.cartSubmitButton}>
             Place Order
           </button>
@@ -185,7 +171,6 @@ export default function BillingForm() {
               <label htmlFor="Cash">Cash On Dilevery</label>
             </div>
           </div>
-
           <div className={styles.couponImageDiv}>
             <Image src="/coupon.png" width={527} height={56} alt="Coupon" />
           </div>

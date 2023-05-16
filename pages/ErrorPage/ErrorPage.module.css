@@ -5,13 +5,11 @@
   justify-content: center;
   height: 100vh;
 }
-
 .ErrorPage_heading {
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
-
 .ErrorPage_text {
   font-size: 2rem;
   text-align: center;

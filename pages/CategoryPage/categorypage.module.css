@@ -1,0 +1,25 @@
+.pagination button {
+  background-color: #f5f5f5;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 20px;
+}
+.headDiv {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  color: grey;
+  font-size: 17px;
+}
+.HeaderTitle {
+  color: black;
+  text-decoration: underline;
+}
+.card_Div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 60px;
+  height: 1000px;
+}

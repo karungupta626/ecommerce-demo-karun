@@ -13,11 +13,9 @@ import axios from "axios";
 import BestSellingProduct from "@/components/BestSellingProduct/BestSellingProduct";
 import { Button } from "@mui/material";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-
 const DetailPage = () => {
   const router = useRouter();
   const [product, setProduct] = useState<ITypes>();
-
   useEffect(() => {
     const { id } = router.query;
     if (id) {
@@ -27,11 +25,9 @@ const DetailPage = () => {
         .catch((error) => console.log(error));
     }
   }, [router.query]);
-
   if (!product) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className={`container ${styles.detailPageWrapper}`}>
       <div className={styles.detailPageHeaderDiv}>
@@ -98,7 +94,6 @@ const DetailPage = () => {
                 </button>
               </div>
             </div>
-
             <div className={styles.detailPageImage}>
               <img
                 src="/dispatch.png"
@@ -118,5 +113,4 @@ const DetailPage = () => {
     </div>
   );
 };
-
 export default DetailPage;

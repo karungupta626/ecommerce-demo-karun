@@ -8,10 +8,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import FlashSales from "@/components/FlashSales/FlashSales";
-
+import Categories from "@/components/Categories/Catergories";
+import Image from "next/image";
 export default function Home() {
   const [showScrollButton, setShowScrollButton] = useState(false);
-
   const handleScroll = () => {
     if (window.pageYOffset > 0) {
       setShowScrollButton(true);
@@ -19,29 +19,28 @@ export default function Home() {
       setShowScrollButton(false);
     }
   };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", handleScroll);
   }
-
   return (
     <>
       <div className={`container ${styles.index_mainDiv}`}>
         <div className={styles.index_firstDiv}>
           <div className={styles.index_typesDiv}>
-            <img src="/types.png" alt="Types" height="344" width="217" />
+            <Categories/>
           </div>
           <Divider type="vertical" className={styles.index_dividerTypesDiv} />
           <div className={styles.index_posterDiv}>
-            <img
+            <Image
               src="/poster.png"
               alt="I Phone Poster"
-              height="344"
-              width="892"
+              height={344}
+              width={892}
+              loading="eager"
+              priority
             />
           </div>
         </div>

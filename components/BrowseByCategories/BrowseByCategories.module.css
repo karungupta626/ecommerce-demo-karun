@@ -14,4 +14,17 @@
 .category_DivMain{
     margin-top: 60px;
     display: flex;
+    justify-content: space-between;
+}
+.category_Box {
+  border-radius: 3px;
+  font-size:25px;
+  font-weight: bold;
+  width: 170px;
+  height: 145px;
+  border: 1px solid grey;
+  margin-right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

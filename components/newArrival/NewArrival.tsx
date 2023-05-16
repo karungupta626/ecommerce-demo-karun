@@ -1,5 +1,4 @@
 import styles from "./NewArrival.module.css";
-
 export default function NewArrival() {
   return (
     <>

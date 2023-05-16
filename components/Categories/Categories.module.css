@@ -1,0 +1,11 @@
+.categoryList{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.categoryList:hover{
+    color: grey;
+    text-decoration: underline;
+}

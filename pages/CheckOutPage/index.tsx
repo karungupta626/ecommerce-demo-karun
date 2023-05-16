@@ -3,12 +3,9 @@ import { useRouter } from "next/router";
 import styles from "./CheckOutPage.module.css";
 import BillingForm from "@/components/BillingForm/BillingForm";
 export default function CheckOutPage() {
-
 const router = useRouter();
-
   return (
     
-
     <>
       <div className={`container ${styles.checkoutWrapper}`}>
         <div className={styles.checkoutHeaderDiv}>

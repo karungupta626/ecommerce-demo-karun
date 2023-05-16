@@ -1,6 +1,12 @@
+import { useRouter } from "next/router";
 import styles from "./BrowseByCategories.module.css";
-
 export default function BrowseByCategories() {
+  const router = useRouter();
+
+  const handleCategoryClick = (category: string) => {
+    router.push(`/CategoryPage/${category}`);
+  };
+
   return (
     <>
       <div className={styles.browseByCategories_mainDiv}>
@@ -13,14 +19,46 @@ export default function BrowseByCategories() {
           />
           &nbsp;&nbsp; Categories
         </div>
-        <div className={styles.browseByCategories_browseDiv}>Browse By Category</div>
+        <div className={styles.browseByCategories_browseDiv}>
+          Browse By Category
+        </div>
         <div className={styles.category_DivMain}>
-        <img
-            src="/browsecategory.png"
-            alt="Browse Category"
-            height="150"
-            width="1250"
-          />
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("smartphones")}
+          >
+            Smartphones
+          </div>
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("fragnances")}
+          >
+            Fragnances
+          </div>
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("mens-watches")}
+          >
+            Watches
+          </div>
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("sunglasses")}
+          >
+            sunglasses
+          </div>
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("furniture")}
+          >
+            furniture
+          </div>
+          <div
+            className={styles.category_Box}
+            onClick={() => handleCategoryClick("womens-jewellery")}
+          >
+            jewellery
+          </div>
         </div>
       </div>
     </>

@@ -13,21 +13,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import Dropdown from "react-bootstrap/Dropdown";
 import { logoutUser } from "@/reducers/AuthSlice";
-
 export default function Header() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-
   const handleSearch = (event: any) => {
     event.preventDefault();
     const keyword = event.target.search.value;
     router.push(`/SearchPage?keyword=${keyword}`);
   };
-
   const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
   const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
   const userData = useSelector((state: RootState) => state.auth.user);
-
   return (
     <>
       <div className={`container ${styles.Header_mainDiv}`}>
@@ -98,7 +94,6 @@ export default function Header() {
                     <FontAwesomeIcon icon={faUser} />
                   )}
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu className={styles.dropdown_menu}>
                   <Dropdown.Item>My Order</Dropdown.Item>
                   <Dropdown.Item>My Cancellations</Dropdown.Item>

@@ -30,8 +30,11 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease-in-out;
 }
-
+.card:hover {
+  transform: scale(1.05);
+}
 .image {
   margin-top: 15px;
   margin-bottom: 25px;
@@ -39,16 +42,15 @@
   width: 190px;
   height: 180px;
 }
-
 .name {
   margin-top: 15px;
   font-size: 25px;
 }
-.originalPrice{
-    font-size: 15px;
-    font-weight: 600;
-    color: grey;
-    text-decoration: line-through;
+.originalPrice {
+  font-size: 15px;
+  font-weight: 600;
+  color: grey;
+  text-decoration: line-through;
 }
 .discountPrice {
   font-size: 20px;
@@ -56,11 +58,11 @@
   color: #db4444;
   margin-right: 15px;
 }
-.ratingDiv{
-    margin-left: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    color: grey;
+.ratingDiv {
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: grey;
 }
 .button {
   width: 100%;
@@ -71,14 +73,12 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
-
 .button:hover {
   background-color: grey;
 }
 .priceContainer {
   display: flex;
 }
-
 .star {
   font-weight: bold;
   margin-right: 2px;

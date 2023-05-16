@@ -11,12 +11,10 @@ import { useDispatch } from "react-redux";
 import { addToWishlist } from "@/reducers/WishlistSlice";
 import axios from "axios";
 import { CartItem, addCartItem, addToCart } from "@/reducers/ShoppingCartSlice";
-
 export interface FlashCardProps {
   product: ITypes;
   data?: any;
 }
-
 const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
@@ -33,7 +31,6 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
       console.error(error);
     }
   };
-
   const handleAddToWishlist = async () => {
     try {
       const response = await axios.post(
@@ -73,7 +70,9 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
             <FontAwesomeIcon className={styles.buttonFa} icon={faEye} />
           </div>
         </div>
-        <button className={styles.button} onClick={handleAddToCart}>Add to Cart</button>
+        <button className={styles.button} onClick={handleAddToCart}>
+          Add to Cart
+        </button>
         <div className={styles.descriptionDiv}>
           <h2 className={styles.name}>{product.title}</h2>
           <div className={styles.priceContainer}>
@@ -85,7 +84,9 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
                   ((100 - product.discountPercentage) / 100)
                 ).toFixed(2)}
               </span>
-              <span className={styles.originalPrice}>${product.price.toFixed(2)}</span>
+              <span className={styles.originalPrice}>
+                ${product.price.toFixed(2)}
+              </span>
             </p>
           </div>
           <div className={styles.rating}>
@@ -94,7 +95,6 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
                 <FontAwesomeIcon icon={faStar} />
               </span>
             ))}
-            {" "}
             <span className={styles.ratingDiv}>({product.rating})</span>
           </div>
         </div>
@@ -102,5 +102,4 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
     </div>
   );
 };
-
 export default FlashCard;
