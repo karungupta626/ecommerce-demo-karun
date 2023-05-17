@@ -19,7 +19,7 @@
   border-radius: 50%;
   width: 24px;
   height: 24px;
-  font-size: 12px;
+  font-size: 10px;
   padding: 4px;
   margin-bottom: 5px;
 }
@@ -44,23 +44,23 @@
 }
 .name {
   margin-top: 15px;
-  font-size: 25px;
+  font-size: 23px;
 }
 .originalPrice {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   color: grey;
   text-decoration: line-through;
 }
 .discountPrice {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: #db4444;
   margin-right: 15px;
 }
 .ratingDiv {
   margin-left: 10px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   color: grey;
 }
@@ -82,14 +82,14 @@
 .star {
   font-weight: bold;
   margin-right: 2px;
-  font-size: 16px;
+  font-size: 14px;
   color: #ffd700;
 }
 .flash_discountPercentage {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 10px;
   background-color: #db4444;
   color: #fff;
   width: 55px;

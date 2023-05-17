@@ -6,7 +6,6 @@ import {
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Header.module.css";
-import { Divider } from "antd";
 import { useRouter } from "next/router";
 import { Badge } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +48,7 @@ export default function Header() {
               className={styles.searchInput}
               name="search"
             />
-            <button type="submit" className={styles.searchButton}>
+            <button type="submit" className={styles.searchButton}  aria-label="Submit Button">
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </form>
@@ -84,15 +83,9 @@ export default function Header() {
             <div className={styles.subBadgeDiv3}>
               <Dropdown>
                 <Dropdown.Toggle variant="outlined" id="dropdown-basic">
-                  {userData?.image ? (
-                    <img
-                      src={userData.image}
-                      alt={userData?.username}
-                      className={styles.header_Image}
-                    />
-                  ) : (
-                    <FontAwesomeIcon icon={faUser} />
-                  )}
+                  <span  aria-label="User">
+                      <FontAwesomeIcon icon={faUser} />
+                  </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className={styles.dropdown_menu}>
                   <Dropdown.Item>My Order</Dropdown.Item>
@@ -112,7 +105,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <Divider style={{ margin: 8 }} />
     </>
   );
 }

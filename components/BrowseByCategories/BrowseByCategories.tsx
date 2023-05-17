@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import styles from "./BrowseByCategories.module.css";
+import Image from "next/image";
 export default function BrowseByCategories() {
   const router = useRouter();
 
@@ -11,11 +12,12 @@ export default function BrowseByCategories() {
     <>
       <div className={styles.browseByCategories_mainDiv}>
         <div className={styles.browseByCategories_featuredDiv}>
-          <img
+          <Image
             src="/categoryRectangle.png"
             alt="Rectangle"
             height="40"
             width="20"
+            loading='lazy'
           />
           &nbsp;&nbsp; Categories
         </div>

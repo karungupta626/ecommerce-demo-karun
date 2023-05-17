@@ -16,7 +16,7 @@ const initialState: AuthState = {
   status: "idle",
   error: null,
   isAuthenticated: !!userFromStorage,
-};
+};   
 
 export const loginUserAsync = createAsyncThunk(
   "auth/login",

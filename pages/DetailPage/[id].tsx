@@ -6,16 +6,22 @@ import { fetchProductById } from "@/reducers/detailpageslice";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ITypes } from "@/types/UserDetails";
-import { Divider } from "antd";
 import { useRouter } from "next/router";
-import { CardProps } from "@/components/Cards/Card";
 import axios from "axios";
 import BestSellingProduct from "@/components/BestSellingProduct/BestSellingProduct";
-import { Button } from "@mui/material";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { fetchWishlist } from "@/reducers/WishlistSlice";
+import Image from "next/image";
 const DetailPage = () => {
   const router = useRouter();
-  const [product, setProduct] = useState<ITypes>();
+  const dispatch: AppDispatch = useDispatch();
+  const [product, setProduct] = useState<ITypes | undefined>(undefined);
+
+  useEffect(() => {
+    dispatch(fetchWishlist());
+  }, [dispatch]);
+
+
   useEffect(() => {
     const { id } = router.query;
     if (id) {
@@ -25,6 +31,11 @@ const DetailPage = () => {
         .catch((error) => console.log(error));
     }
   }, [router.query]);
+
+  const moveToCart = () => {
+    router.push("/ShoppingCartPage");
+  };
+
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -72,10 +83,8 @@ const DetailPage = () => {
             <div className={styles.detailPageDescription}>
               {product.description}
             </div>
-            <Divider />
             <div className={styles.detailPageBuynowDiv}>
               <div className={styles.detailPageQuantityDiv}>
-                {/* <button className={styles.quantityButton}>-</button> */}
                 <input
                   className={styles.quantityInput}
                   type="number"
@@ -83,10 +92,9 @@ const DetailPage = () => {
                   min={1}
                   max={10}
                 />
-                {/* <button className={styles.quantityButton}>+</button> */}
               </div>
               <div className={styles.detailPageQuantityButton}>
-                <button className={styles.buyNowButton}>Buy Now</button>
+                <button className={styles.buyNowButton}  onClick={moveToCart}>Buy Now</button>
               </div>
               <div className={styles.detailPageFavoriteButton}>
                 <button className={styles.favoriteButton} onClick={()=>router.push("/WishlistPage")}>
@@ -95,11 +103,12 @@ const DetailPage = () => {
               </div>
             </div>
             <div className={styles.detailPageImage}>
-              <img
+              <Image
                 src="/dispatch.png"
                 alt="Dispatch"
                 height="180"
                 width="399"
+                loading='lazy'
               />
             </div>
           </div>

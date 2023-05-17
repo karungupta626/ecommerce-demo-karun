@@ -20,7 +20,7 @@ color: black;
 border-radius: 50%;
 width: 24px;
 height: 24px;
-font-size: 12px;
+font-size: 10px;
 padding: 4px;
 margin-bottom: 5px;
 }
@@ -45,10 +45,10 @@ height: 180px;
 }
 .name {
 margin-top: 15px;
-font-size: 25px;
+font-size: 23px;
 }
 .price {
-font-size: 20px;
+font-size: 18px;
 font-weight: 600;
 color: #db4444;
 margin-right: 15px;
@@ -71,6 +71,6 @@ display: flex;
 .star {
 font-weight: bold;
 margin-right: 2px;
-font-size: 16px;
+font-size: 14px;
 color: #ffd700;
 }

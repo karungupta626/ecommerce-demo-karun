@@ -1,14 +1,8 @@
 import { faCopyright, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
-import {
-  faFacebook,
-  faInstagram,
-  faTwitter,
-  faLinkedin,
-} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Footer.module.css";
-import { Divider } from "antd";
 import { useRouter } from "next/router";
+import Image from "next/image";
 export default function Footer() {
   const router = useRouter();
   return (
@@ -55,48 +49,41 @@ export default function Footer() {
               <p className={styles.qrcode}>Save $3 with App New User Only</p>
               <div className={styles.scanLinks}>
                 <div className={styles.qrCode}>
-                  <img
+                  <Image
                     src="/qrcodeimg.png"
                     alt="QR code"
                     width="80"
                     height="85"
+                    loading='lazy'
                   />
                 </div>
                 <div className={styles.store}>
-                  <img
-                    src="/googleplay.svg"
+                  <Image
+                    src="/googleplay.png"
                     alt="Google Play"
                     width="110"
                     height="40"
+                    loading='lazy'
                   />
-                  <img
+                  <Image
                     src="/appstore.png"
                     alt="App Store"
                     width="110"
                     height="40"
+                    loading='lazy'
                   />
                 </div>
               </div>
             </div>
             <div className={styles.menuLinks}>
-              <FontAwesomeIcon
-                icon={faFacebook}
-                style={{ marginRight: "25px" }}
-              />
-              <FontAwesomeIcon
-                icon={faInstagram}
-                style={{ marginRight: "25px" }}
-              />
-              <FontAwesomeIcon
-                icon={faTwitter}
-                style={{ marginRight: "25px" }}
-              />
-              <FontAwesomeIcon icon={faLinkedin} />
+              <Image 
+                src="/brand.png"
+                width={168}
+                height={24} alt={"brands"} loading='lazy'/>
             </div>
           </div>
         </div>
       </div>
-      <Divider style={{ margin: 0, color: "grey" }} />
       <div className={`container-fluid ${styles.Footer_copyRight}`}>
         <FontAwesomeIcon icon={faCopyright} /> &nbsp; Copyright Rimel 2023. All
         rights reserved

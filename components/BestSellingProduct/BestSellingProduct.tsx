@@ -40,7 +40,7 @@ export default function BestSellingProduct() {
     <>
       <div className={styles.bestSellingProduct_mainDiv}>
         <div className={styles.bestSellingProduct_featuredDiv}>
-          <Image src="/categoryRectangle.png" alt="Rectangle" height="40" width="20" />
+          <Image src="/categoryRectangle.png" alt="Rectangle" height="40" width="20" loading='lazy'/>
           &nbsp;&nbsp;This Month
         </div>
         <div className={styles.bestSellingProduct_bestSellingDiv}>

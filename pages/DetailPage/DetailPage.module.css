@@ -12,7 +12,7 @@
   text-decoration: underline;
 }
 .detailPage_featuredDiv {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #db4444;
   margin-bottom: 60px;
@@ -67,7 +67,7 @@
   height: 45px;
   border: none;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 5px;
 }
 .favoriteButton {
@@ -77,7 +77,7 @@
   height: 40px;
   background-color: white;
   color: black;
-  font-size: 20px;
+  font-size: 18px;
 }
 .image {
   height: 315px;
@@ -86,21 +86,21 @@
   margin-left: 27px;
 }
 .detailPagetitleDiv{
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
 }
 .detailPageSubHeadDiv{
-    font-size: 16px;
+    font-size: 14px;
 }
 .detailPageStock{
     color: rgb(17, 184, 17);
 }
 .detailPagePriceDiv{
-    font-size: 24px;
+    font-size: 22px;
     color: #db4444;
 }
 .detailPageDescription{
-    font-size: 16px;
+    font-size: 14px;
     text-align: justify;
   text-justify: inter-word;
   word-wrap: break-word;
@@ -108,6 +108,6 @@
 .star {
   font-weight: bold;
   margin-right: 2px;
-  font-size: 16px;
+  font-size: 14px;
   color: #ffd700;
 }

@@ -76,8 +76,19 @@ export const fetchWishlist = (): AppThunk => async (dispatch) => {
 };
 
 export const addToWishlistAsync = (item: WishlistItem): AppThunk => async (
-  dispatch
+  dispatch,
+  getState
 ) => {
+  const { wishlist } = getState().wishlist;
+
+  // Check if the item is already in the wishlist
+  const isDuplicate = wishlist.some((wishlistItem) => wishlistItem.id === item.id);
+
+  if (isDuplicate) {
+    console.log('Item already exists in the wishlist.');
+    return;
+  }
+
   try {
     const response = await axios.post<WishlistItem>(
       "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist",
@@ -88,6 +99,7 @@ export const addToWishlistAsync = (item: WishlistItem): AppThunk => async (
     console.log(error);
   }
 };
+
 
 export const deleteFromWishlistAsync = (
   itemId: string

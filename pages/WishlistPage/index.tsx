@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 const WishlistPage = () => {
   const router  = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const { wishlist, loading } = useSelector(
+  const { wishlist } = useSelector(
     (state: RootState) => state.wishlist
   );
   const sorted = wishlist.flatMap((item) => item.product);
@@ -49,11 +49,11 @@ const WishlistPage = () => {
           </Button>
         </div>
         <div className={styles.pagination}>
-          <button onClick={prevPage} disabled={currentPage === 1}>
+          <button onClick={prevPage} disabled={currentPage === 1}  aria-label="Previous Page">
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           &nbsp;&nbsp;
-          <button onClick={nextPage} disabled={currentPage === totalPages}>
+          <button onClick={nextPage} disabled={currentPage === totalPages}  aria-label="Next Page">
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>

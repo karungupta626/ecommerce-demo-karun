@@ -3,12 +3,12 @@
 }
 .browseByCategories_featuredDiv {
   margin-top: 24px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #db4444;
 }
 .browseByCategories_browseDiv {
-  font-size: 33px;
+  font-size: 31px;
   font-weight: bold;
 }
 .category_DivMain{
@@ -18,7 +18,7 @@
 }
 .category_Box {
   border-radius: 3px;
-  font-size:25px;
+  font-size:23px;
   font-weight: bold;
   width: 170px;
   height: 145px;

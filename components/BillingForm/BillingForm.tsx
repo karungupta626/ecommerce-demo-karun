@@ -1,7 +1,6 @@
 
 import { useForm } from "react-hook-form";
 import styles from "./BillingForm.module.css";
-import { Divider } from "antd";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
@@ -133,12 +132,10 @@ export default function BillingForm() {
               <span>Subtotal:</span>
               <span>${subtotal}</span>
             </div>
-            <Divider />
             <div className={styles.shipping}>
               <span>Shipping:</span>
               <span>Free</span>
             </div>
-            <Divider />
             <div className={styles.Total}>
               <span>Total:</span>
               <span>${subtotal}</span>
@@ -158,10 +155,10 @@ export default function BillingForm() {
                 <label htmlFor="Bank">Bank</label>
               </div>
               <div className={styles.bankImage}>
-                <Image src="/bank1.png" width={42} height={28} alt="Bank1" />
-                <Image src="/bank2.png" width={42} height={28} alt="Bank2" />
-                <Image src="/bank3.png" width={42} height={28} alt="Bank3" />
-                <Image src="/bank4.png" width={42} height={28} alt="Bank4" />
+                <Image src="/bank1.png" width={42} height={28} alt="Bank1" loading='lazy'/>
+                <Image src="/bank2.png" width={42} height={28} alt="Bank2" loading='lazy'/>
+                <Image src="/bank3.png" width={42} height={28} alt="Bank3" loading='lazy'/>
+                <Image src="/bank4.png" width={42} height={28} alt="Bank4" loading='lazy'/>
               </div>
             </div>
             <br />
@@ -172,11 +169,8 @@ export default function BillingForm() {
             </div>
           </div>
           <div className={styles.couponImageDiv}>
-            <Image src="/coupon.png" width={527} height={56} alt="Coupon" />
+            <Image src="/coupon.png" width={527} height={56} alt="Coupon" loading='lazy'/>
           </div>
-          {/* <button type="submit" className={styles.cartFooterButton}>
-            Place Order
-          </button> */}
         </div>
       </div>
     </>

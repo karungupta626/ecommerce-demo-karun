@@ -3,12 +3,12 @@
 }
 .explore_featuredDiv {
   margin-top: 24px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: #db4444;
 }
 .explore_newArrivalDiv {
-  font-size: 33px;
+  font-size: 31px;
   font-weight: bold;
   display: flex;
   margin-bottom: 60px;
@@ -29,5 +29,5 @@
   border-radius: 50%;
   width: 46px;
   height: 46px;
-  font-size: 20px;
+  font-size: 18px;
 }

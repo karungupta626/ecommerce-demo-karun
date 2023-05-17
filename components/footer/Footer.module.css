@@ -21,7 +21,7 @@
 }
 .menuItem1 {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 15px;
 }
 .menuItem2,
@@ -29,11 +29,11 @@
 .menuItem4,
 .menuItem5,
 .menuItem6 {
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 .menuEmail{
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 10px;
     position: relative;
     display: flex;

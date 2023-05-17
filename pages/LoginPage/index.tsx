@@ -5,10 +5,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "@/store";
 import { loginUserAsync } from "@/reducers/AuthSlice";
 import Image from "next/image";
+import { useRouter } from "next/router";
 interface LoginForm {
   username: string;
   password: string;
@@ -26,7 +26,7 @@ export default function LoginPage() {
     if (isAuthenticated) {
     router.push("/");
     }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, router]);
     
     const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const { username, password } = data;
@@ -45,6 +45,7 @@ export default function LoginPage() {
             alt="App Store"
             width="781"
             height="805"
+            loading='lazy'
           />
         </div>
         <div className={styles.LoginPage_inputDiv}>

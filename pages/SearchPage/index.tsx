@@ -3,7 +3,6 @@ import styles from "./SearchPage.module.css";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { ITypes } from "@/types/UserDetails";
-import { RootState } from "@/store/rootReducer";
 import { useEffect, useState } from "react";
 import {
   selectProducts,
@@ -56,11 +55,11 @@ export default function SearchPage() {
             {`Search Results for "${keyword}"`}
           </h2>
           <div className={styles.pagination}>
-            <button onClick={prevPage} disabled={currentPage === 1}>
+            <button onClick={prevPage} disabled={currentPage === 1}  aria-label="Previous Page">
               <FontAwesomeIcon icon={faArrowLeft} />
             </button>
             &nbsp;&nbsp;
-            <button onClick={nextPage} disabled={currentPage === totalPages}>
+            <button onClick={nextPage} disabled={currentPage === totalPages}  aria-label="Next Page">
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>

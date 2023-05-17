@@ -7,6 +7,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ITypes } from '@/types/UserDetails';
 import FlashCard from '../Cards/FlashCard';
+import Image from 'next/image';
 export default function FlashSales() {
   const dispatch: AppDispatch = useDispatch();
   const { products, status, error } = useSelector(
@@ -41,30 +42,32 @@ export default function FlashSales() {
     <>
       <div className={styles.flashSales_mainDiv}>
         <div className={styles.flashSales_featuredDiv}>
-          <img
+          <Image
             src="/categoryRectangle.png"
             alt="Rectangle"
             height="40"
             width="20"
+            loading='lazy'
           />
           &nbsp;&nbsp; {`Today's`}
         </div>
         <div className={styles.flashSales_flashSalesDiv}>
           <span>Flash Sales</span>
           <span className={styles.flashSales_timerDiv}>
-            <img
+            <Image
               src="/flashsaletimer.png"
               alt="Timer"
               height="50"
               width="302"
+              loading='lazy'
             />
           </span>
           <div className={styles.pagination}>
-            <button onClick={prevPage} disabled={currentPage === 1}>
+            <button onClick={prevPage} disabled={currentPage === 1}  aria-label="Previous Page">
               <FontAwesomeIcon icon={faArrowLeft} />
             </button>
             &nbsp;&nbsp;
-            <button onClick={nextPage} disabled={currentPage === totalPages}>
+            <button onClick={nextPage} disabled={currentPage === totalPages}  aria-label="Next Page">
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>

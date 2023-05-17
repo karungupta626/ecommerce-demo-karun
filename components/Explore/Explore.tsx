@@ -47,6 +47,7 @@ export default function Explore() {
             alt="Rectangle"
             height="40"
             width="20"
+            loading='lazy'
           />
           &nbsp;&nbsp; Our Products
         </div>
@@ -54,11 +55,11 @@ export default function Explore() {
           <div className={styles.explore_productDiv}>Explore Our Products</div>
           
           <div className={styles.pagination}>
-            <button onClick={prevPage} disabled={currentPage === 1}>
+            <button onClick={prevPage} disabled={currentPage === 1}  aria-label="Previous Page">
             <FontAwesomeIcon icon={faArrowLeft} />
             </button>
             &nbsp;&nbsp;
-            <button onClick={nextPage} disabled={currentPage === totalPages}>
+            <button onClick={nextPage} disabled={currentPage === totalPages}  aria-label="Next Page">
             <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
