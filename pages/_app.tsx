@@ -2,6 +2,7 @@
 import styles from "../styles/app.module.css";
 import 'typeface-inter';
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from "next/app";
 import Header from "@/components/header/Header";
 import TopHeader from "@/components/header/TopHeader";

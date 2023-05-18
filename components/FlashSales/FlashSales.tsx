@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ITypes } from '@/types/UserDetails';
 import FlashCard from '../Cards/FlashCard';
 import Image from 'next/image';
+import { ToastContainer } from 'react-toastify';
 export default function FlashSales() {
   const dispatch: AppDispatch = useDispatch();
   const { products, status, error } = useSelector(
@@ -76,6 +77,7 @@ export default function FlashSales() {
           {currentCards?.map((product: ITypes) => (
             <FlashCard key={product.id} product={product} />
           ))}
+          <ToastContainer />
         </div>
       </div>
     </>

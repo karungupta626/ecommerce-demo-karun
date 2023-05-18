@@ -23,6 +23,23 @@ export default function Header() {
   const wishlist = useSelector((state: RootState) => state.wishlist.wishlist);
   const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
   const userData = useSelector((state: RootState) => state.auth.user);
+
+  const checkGoToWishlist = () => {
+    if (userData) {
+      router.push("/WishlistPage");
+    } else {
+      router.push("/LoginPage");
+    }
+  };
+
+  const checkGoToCart = () => {
+    if (userData) {
+      router.push("/ShoppingCartPage");
+    } else {
+      router.push("/LoginPage");
+    }
+  };
+
   return (
     <>
       <div className={`container ${styles.Header_mainDiv}`}>
@@ -48,7 +65,11 @@ export default function Header() {
               className={styles.searchInput}
               name="search"
             />
-            <button type="submit" className={styles.searchButton}  aria-label="Submit Button">
+            <button
+              type="submit"
+              className={styles.searchButton}
+              aria-label="Submit Button"
+            >
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </form>
@@ -61,7 +82,7 @@ export default function Header() {
               >
                 <FontAwesomeIcon
                   icon={faHeart}
-                  onClick={() => router.push("/WishlistPage")}
+                  onClick={checkGoToWishlist}
                   size="lg"
                 />
               </Badge>
@@ -75,7 +96,7 @@ export default function Header() {
               >
                 <FontAwesomeIcon
                   icon={faShoppingCart}
-                  onClick={() => router.push("/ShoppingCartPage")}
+                  onClick={checkGoToCart}
                   size="lg"
                 />
               </Badge>
@@ -83,12 +104,14 @@ export default function Header() {
             <div className={styles.subBadgeDiv3}>
               <Dropdown>
                 <Dropdown.Toggle variant="outlined" id="dropdown-basic">
-                  <span  aria-label="User">
-                      <FontAwesomeIcon icon={faUser} />
+                  <span>
+                    <FontAwesomeIcon icon={faUser} />
                   </span>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className={styles.dropdown_menu}>
-                  <Dropdown.Item>My Order</Dropdown.Item>
+                  <Dropdown.Item onClick={() => router.push("/LoginPage")}>
+                    My Order
+                  </Dropdown.Item>
                   <Dropdown.Item>My Cancellations</Dropdown.Item>
                   <Dropdown.Item>My Reviews</Dropdown.Item>
                   <Dropdown.Item

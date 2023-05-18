@@ -6,6 +6,7 @@ interface AuthState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
   isAuthenticated: boolean;
+  
 }
 
 const userFromStorage =

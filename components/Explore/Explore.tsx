@@ -8,6 +8,7 @@ import { ITypes } from "@/types/UserDetails";
 import { faArrowLeft , faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { ToastContainer } from "react-toastify";
 export default function Explore() {
   const dispatch: AppDispatch = useDispatch();
   const { products, status, error } = useSelector(
@@ -68,6 +69,7 @@ export default function Explore() {
           {currentCards?.map((product: ITypes) => (
             <Card key={product.id} product={product} />
           ))}
+          <ToastContainer />
         </div>
       </div>
     </>

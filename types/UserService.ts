@@ -12,12 +12,11 @@ export class UserService {
   }
 
   public static async getProductById(id: string): Promise<ITypes> {
-    const response = await axios.get<ITypes>(
-      `${this.BASE_URL}/${id}`
-    );
-    return response.data;
-  }
-  
+  const response = await axios.get<ITypes>(
+    `${this.BASE_URL}/${id}`
+  );
+  return response.data;
+}
 
   public static async getProductsByRating(
     rating: number,

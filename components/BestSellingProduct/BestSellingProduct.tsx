@@ -8,6 +8,7 @@ import { ITypes } from '@/types/UserDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBestSellingProducts } from '@/reducers/BestSellingProductSlice';
 import Image from 'next/image';
+import { ToastContainer } from 'react-toastify';
 export default function BestSellingProduct() {
   const dispatch: AppDispatch = useDispatch();
   const { products, loading, error } = useSelector((state: RootState) => state.bestSellingProducts);
@@ -59,6 +60,7 @@ export default function BestSellingProduct() {
           {currentCards?.map((product: ITypes) => (
             <Card key={product.id} product={product} />
           ))}
+          <ToastContainer />
         </div>
       </div>
     </>

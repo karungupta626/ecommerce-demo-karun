@@ -3,6 +3,7 @@ import { AppThunk } from "../store";
 
 import { ITypes } from "@/types/UserDetails";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface WishlistState {
   wishlist: WishlistItem[];
@@ -10,7 +11,7 @@ interface WishlistState {
   error: string | null;
 }
 
- export interface WishlistItem {
+export interface WishlistItem {
   id: string;
   userId: string;
   name: string;
@@ -30,7 +31,13 @@ const wishlistSlice = createSlice({
   initialState,
   reducers: {
     addToWishlist(state, action: PayloadAction<WishlistItem>) {
-      state.wishlist.push(action.payload);
+      const { id } = action.payload;
+
+      const isDuplicate = state.wishlist.some((item) => item.id === id);
+
+      if (!isDuplicate) {
+        state.wishlist.push(action.payload);
+      }
     },
     removeFromWishlist(state, action: PayloadAction<string>) {
       state.wishlist = state.wishlist.filter(
@@ -81,7 +88,6 @@ export const addToWishlistAsync = (item: WishlistItem): AppThunk => async (
 ) => {
   const { wishlist } = getState().wishlist;
 
-  // Check if the item is already in the wishlist
   const isDuplicate = wishlist.some((wishlistItem) => wishlistItem.id === item.id);
 
   if (isDuplicate) {
@@ -109,7 +115,8 @@ export const deleteFromWishlistAsync = (
       `https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist/${itemId}`
     );
     dispatch(removeFromWishlist(itemId));
+    toast.success('Successfully deleted from wishlist');
   } catch (error) {
-    console.log(error);
+    toast.error('Failed to delete from wishlist');
   }
 };

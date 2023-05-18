@@ -1,55 +1,61 @@
 import { Button } from "@mui/material";
 import styles from "./ShoppingCartPage.module.css";
 import { useRouter } from "next/router";
-import { AppDispatch, RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  CartItem,
   fetchCartItems,
   removeCartItem,
   updateCartItemQuantity,
 } from "@/reducers/ShoppingCartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-export default function ShoppingCartPage({ item }: { item: CartItem }) {
+import { AppDispatch, RootState } from "@/store";
+import { ToastContainer } from "react-toastify";
+
+export default function ShoppingCartPage() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.shoppingCart.items);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
+
   useEffect(() => {
     dispatch(fetchCartItems());
   }, [dispatch]);
+
   useEffect(() => {
-    setSubtotal(
-      cartItems.reduce(
-        (total, item) => total + item.product.price * item.quantity,
-        0
-      )
+    const calculatedSubtotal = cartItems.reduce(
+      (total, item) => total + (item.product?.price || 0) * item.quantity,
+      0
     );
-    setTotal(subtotal);
+    setSubtotal(calculatedSubtotal);
+    setTotal(calculatedSubtotal);
   }, [cartItems]);
+
   const handleQuantityChange = (id: string, quantity: number) => {
     dispatch(updateCartItemQuantity({ id, quantity }));
   };
+
   const handleUpdateCart = () => {
     let subtotal = 0;
     cartItems.forEach((item) => {
-      subtotal += item.product.price * item.quantity;
+      subtotal += (item.product?.price || 0) * item.quantity;
     });
     setSubtotal(subtotal);
     setTotal(subtotal);
     alert("Cart updated!");
   };
-  const handleDeleteItem = (id :string) => {
+
+  const handleDeleteItem = (id: string) => {
     dispatch(removeCartItem(id));
   };
+
   return (
     <>
       <div className={`container ${styles.cartWrapper}`}>
         <div className={styles.cartHeaderDiv}>
-          Home / <span className={styles.HeaderTitle}>Cart</span>
+          <span onClick={()=>router.push("/")}>Home</span> / <span className={styles.HeaderTitle}>Cart</span>
         </div>
         <div className={styles.cartMainDiv}>
           <div className={styles.cartMainHeadDiv}>
@@ -59,7 +65,7 @@ export default function ShoppingCartPage({ item }: { item: CartItem }) {
             <span>Subtotal</span>
           </div>
           {cartItems.map((item) => (
-            <div key={item.product.id} className={styles.cartMainQuantityDiv}>
+            <div key={item.id} className={styles.cartMainQuantityDiv}>
               {item.product && (
                 <>
                   <span>
@@ -69,8 +75,9 @@ export default function ShoppingCartPage({ item }: { item: CartItem }) {
                       height="50"
                       width="39"
                     />
-                    <button className={styles.closebutton}
-                    onClick={() => handleDeleteItem(item.id)}
+                    <button
+                      className={styles.closebutton}
+                      onClick={() => handleDeleteItem(item.id)}
                     >
                       <FontAwesomeIcon icon={faClose} />
                     </button>
@@ -90,6 +97,7 @@ export default function ShoppingCartPage({ item }: { item: CartItem }) {
               )}
             </div>
           ))}
+          <ToastContainer />
           <div className={styles.cartMainButtonDiv}>
             <Button
               variant="outlined"

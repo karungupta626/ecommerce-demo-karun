@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
-import { addToWishlist } from "@/reducers/WishlistSlice";
+import { WishlistItem, addToWishlist } from "@/reducers/WishlistSlice";
 import axios from "axios";
 import { CartItem, addCartItem, addToCart } from "@/reducers/ShoppingCartSlice";
+import { toast } from "react-toastify";
 export interface FlashCardProps {
   product: ITypes;
   data?: any;
@@ -20,19 +21,47 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
   const dispatch: AppDispatch = useDispatch();
   const handleAddToCart = async () => {
     try {
+      const { data: cartItems } = await axios.get<CartItem[]>(
+        "https://645dfaea12e0a87ac0e467db.mockapi.io/cart"
+      );
+  
+      const isDuplicate = cartItems.some(
+        (cartItem) => cartItem.product.id === product.id
+      );
+  
+      if (isDuplicate) {
+        toast.error('Item already exists in the cart.');
+        return;
+      }
+  
       const cartItem: CartItem = {
         product: product,
         quantity: 1,
         id: "",
       };
+  
       await dispatch(addCartItem(cartItem));
-      router.push("/ShoppingCartPage");
+      toast.success('Successfully added to cart');
     } catch (error) {
-      console.error(error);
+      toast.error('Failed to add to cart');
     }
   };
+  
   const handleAddToWishlist = async () => {
     try {
+      const { data: wishlistItems } = await axios.get<WishlistItem[]>(
+        "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist"
+      );
+  
+      const isDuplicate = wishlistItems.some(
+        (wishlistItem) => wishlistItem.product.id === product.id
+      );
+  
+      if (isDuplicate) {
+        toast.error('Item already exists in the wishlist.');
+        return;
+      }
+  
       const response = await axios.post(
         "https://645dfaea12e0a87ac0e467db.mockapi.io/wishlist",
         {
@@ -40,11 +69,13 @@ const FlashCard: React.FC<FlashCardProps> = ({ product }: FlashCardProps) => {
           product: product,
         }
       );
+  
       const wishlistItem = response.data;
       dispatch(addToWishlist(wishlistItem));
-      router.push("/WishlistPage");
+      toast.success('Successfully added to wishlist');
     } catch (error) {
       console.error(error);
+      toast.error('Failed to add to wishlist');
     }
   };
   return (
